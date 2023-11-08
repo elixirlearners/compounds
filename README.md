@@ -1,2 +1,2 @@
 # compounds
-A Phoenix UI Components Library | Brew Your Own Interfaces.
+A Phoenix UI Components Library | Brew Your Own Interfaces
