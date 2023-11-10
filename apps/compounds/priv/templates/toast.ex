@@ -1,4 +1,4 @@
-defmodule Button do
+defmodule ToastComponent do
   def my_<%= @function_name %>() do
     IO.puts("Hello, world.")
   end

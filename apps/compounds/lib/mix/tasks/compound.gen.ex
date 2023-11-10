@@ -5,9 +5,13 @@ defmodule Mix.Tasks.Compound.Gen do
   use Mix.Task
 
   @switches [
-    comp: :string
+    card: :boolean,
+    input: :boolean,
+    toast: :boolean,
   ]
-  @default_opts [comp: :all]
+
+  @default_opts []
+
   @doc false
   @impl Mix.Task
   def run(args) do
@@ -25,14 +29,36 @@ defmodule Mix.Tasks.Compound.Gen do
       |> Enum.each(&generate/1)
   end
 
-  defp generate({:comp, "button"}) do
+  defp generate({:card, true}) do
     { result, _bindings } = 
-      Path.join(get_templates_dir(), "button.ex")
+      Path.join(get_templates_dir(), "card.ex")
       |> EEx.compile_file
       |> Code.eval_quoted(assigns: [function_name: "test"])
     project_name = 
     get_and_create_comp_dir()
-    |> Path.join("/button.ex")
+    |> Path.join("/card.ex")
+    |> File.write(result)
+  end
+
+  defp generate({:input, true}) do
+    { result, _bindings } = 
+      Path.join(get_templates_dir(), "input.ex")
+      |> EEx.compile_file
+      |> Code.eval_quoted(assigns: [function_name: "test"])
+    project_name = 
+    get_and_create_comp_dir()
+    |> Path.join("/input.ex")
+    |> File.write(result)
+  end
+
+  defp generate({:toast, true}) do
+    { result, _bindings } = 
+      Path.join(get_templates_dir(), "toast.ex")
+      |> EEx.compile_file
+      |> Code.eval_quoted(assigns: [function_name: "test"])
+    project_name = 
+    get_and_create_comp_dir()
+    |> Path.join("/toast.ex")
     |> File.write(result)
   end
 
