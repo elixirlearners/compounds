@@ -5,6 +5,7 @@ defmodule Mix.Tasks.Compound.Gen do
   use Mix.Task
 
   @switches [
+    all: :boolean,
     card: :boolean,
     input: :boolean,
     toast: :boolean,
@@ -25,41 +26,51 @@ defmodule Mix.Tasks.Compound.Gen do
       args
       |> parse_args
       |> validate_args!
-    opts
-      |> Enum.each(&generate/1)
+    if Keyword.has_key?(opts, :all) do
+      generate_all(opts)
+    else
+      opts
+        |> Enum.each(&generate_components/1)
+    end
   end
 
-  defp generate({:card, true}) do
-    { result, _bindings } = 
-      Path.join(get_templates_dir(), "card.ex")
-      |> EEx.compile_file
-      |> Code.eval_quoted(assigns: [function_name: "test"])
-    project_name = 
-    get_and_create_comp_dir()
-    |> Path.join("/card.ex")
-    |> File.write(result)
+  defp generate_all(opts) do
+    if opts[:all] do
+      for key <- Keyword.keys(@switches), key != :all  do
+        generate_components({key, true})
+      end
+    end
   end
 
-  defp generate({:input, true}) do
-    { result, _bindings } = 
-      Path.join(get_templates_dir(), "input.ex")
-      |> EEx.compile_file
-      |> Code.eval_quoted(assigns: [function_name: "test"])
-    project_name = 
-    get_and_create_comp_dir()
-    |> Path.join("/input.ex")
-    |> File.write(result)
+  defp generate_components({:card, true}) do
+    generate("card.ex", [function_name: "test"])
   end
 
-  defp generate({:toast, true}) do
+  defp generate_components({:input, true}) do
+    generate("input.ex", [function_name: "test"])
+  end
+
+  defp generate_components({:toast, true}) do
+    generate("toast.ex", [function_name: "test"])
+  end
+
+  defp generate(template_file, assigns) do
     { result, _bindings } = 
-      Path.join(get_templates_dir(), "toast.ex")
+      Path.join(get_templates_dir(), template_file)
       |> EEx.compile_file
-      |> Code.eval_quoted(assigns: [function_name: "test"])
-    project_name = 
+      |> Code.eval_quoted(assigns: assigns)
+    Mix.Shell.IO.info("Creating " <> IO.ANSI.green() <> template_file <> IO.ANSI.reset() <> " in #{get_templates_dir()}")
+    destination = 
     get_and_create_comp_dir()
-    |> Path.join("/toast.ex")
-    |> File.write(result)
+    |> Path.join(template_file)
+    if File.exists?(destination) do
+      if Mix.Shell.IO.yes?("File #{destination} already exists, overwrite?") do
+        File.write!(destination, result)
+      end
+    else
+        File.write!(destination, result)
+    end
+    Mix.Shell.IO.info(IO.ANSI.green() <> "* " <> template_file <> IO.ANSI.reset() <> " created.")
   end
 
   defp get_root_dir, do: :code.priv_dir(Application.get_application(__MODULE__))
