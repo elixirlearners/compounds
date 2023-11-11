@@ -17,7 +17,7 @@ defmodule CompoundsTesterWeb.Router do
   scope "/", CompoundsTesterWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", Home
   end
 
   # Other scopes may use custom stacks.

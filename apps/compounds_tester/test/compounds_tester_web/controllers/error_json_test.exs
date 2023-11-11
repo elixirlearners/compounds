@@ -2,7 +2,9 @@ defmodule CompoundsTesterWeb.ErrorJSONTest do
   use CompoundsTesterWeb.ConnCase, async: true
 
   test "renders 404" do
-    assert CompoundsTesterWeb.ErrorJSON.render("404.json", %{}) == %{errors: %{detail: "Not Found"}}
+    assert CompoundsTesterWeb.ErrorJSON.render("404.json", %{}) == %{
+             errors: %{detail: "Not Found"}
+           }
   end
 
   test "renders 500" do
