@@ -1,14 +1,12 @@
 import Config
 
 # Configure your database
-config :compounds_tester, CompoundsTester.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "compounds_tester_dev",
+config :compounds, Compounds.Repo,
+  database: Path.expand("../compounds_dev.db", Path.dirname(__ENV__.file)),
+  pool_size: 5,
   stacktrace: true,
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  show_sensitive_data_on_connection_error: true
+
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
