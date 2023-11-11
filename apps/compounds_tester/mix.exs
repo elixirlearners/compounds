@@ -37,6 +37,7 @@ defmodule CompoundsTester.MixProject do
   defp deps do
     [
       {:compounds, path: "../compounds"},
+      {:tails, "~> 0.1.5"},
       {:phoenix, "~> 1.7.9"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.10"},

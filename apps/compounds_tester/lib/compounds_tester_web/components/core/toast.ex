@@ -12,3 +12,4 @@ defmodule CompoundsTesterWeb.Core.Toast do
     ~H"""
     """
   end
+end
