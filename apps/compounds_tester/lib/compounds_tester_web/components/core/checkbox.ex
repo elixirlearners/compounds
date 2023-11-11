@@ -1,6 +1,11 @@
 defmodule CompoundsTesterWeb.Core.Checkbox do
+  @moduledoc """
+    A simple checkbox component.
+  """
+  
   use Phoenix.Component
   alias Phoenix.LiveView.JS
+
 
   attr :style, :string,
     default: """
