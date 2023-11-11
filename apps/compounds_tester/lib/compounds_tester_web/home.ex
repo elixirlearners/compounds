@@ -5,7 +5,7 @@ defmodule CompoundsTesterWeb.Home do
 
   use Phoenix.LiveView
   import CompoundsTesterWeb.Core.Checkbox
-  import CompoundsTesterWeb.Examples
+  import CompoundsTesterWeb.Demos
 
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
@@ -13,9 +13,8 @@ defmodule CompoundsTesterWeb.Home do
 
   def render(assigns) do
     ~H"""
-    <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full">
-      <.style_api/>
-    </div>
+      <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full">
+      </div>
     """
   end
 

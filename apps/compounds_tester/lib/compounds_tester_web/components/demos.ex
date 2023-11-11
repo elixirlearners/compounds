@@ -1,8 +1,8 @@
-defmodule CompoundsTesterWeb.Examples do
+defmodule CompoundsTesterWeb.Demos do
   @moduledoc """
     Contains our various past experiments to be used as a reference for future development.
     These experiments are stored as Phoenix components.
-    To see the examples in action, import this module in `home.ex` and use the component in the render function.
+    To see the demos in action, import this module in `home.ex` and use the component in the render function.
   """
 
   use Phoenix.Component
