@@ -59,10 +59,10 @@ defmodule Mix.Tasks.Compound.Gen do
       Path.join(get_templates_dir(), template_file)
       |> EEx.compile_file
       |> Code.eval_quoted(assigns: assigns)
-    Mix.Shell.IO.info("Creating " <> IO.ANSI.green() <> template_file <> IO.ANSI.reset() <> " in #{get_templates_dir()}")
     destination = 
     get_and_create_comp_dir()
     |> Path.join(template_file)
+    Mix.Shell.IO.info("Creating " <> IO.ANSI.green() <> template_file <> IO.ANSI.reset() <> " at #{destination}")
     if File.exists?(destination) do
       if Mix.Shell.IO.yes?("File #{destination} already exists, overwrite?") do
         File.write!(destination, result)
