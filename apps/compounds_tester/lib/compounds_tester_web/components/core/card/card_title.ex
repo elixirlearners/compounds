@@ -26,14 +26,14 @@ defmodule CompoundsTesterWeb.Core.Card.CardTitle do
     """
     
       slot :inner_block
-      attr :custom_style, :string, default: nil
+      attr :class, :string, default: nil
 
   def card_title(assigns) do
     assigns = assign(assigns, style: "text-2xl font-bold text-gray-700")
 
 
     ~H"""
-      <div class={Tails.classes([@style, @custom_style])}>
+      <div class={Tails.classes([@style, @class])}>
         <%= render_slot(@inner_block) %>
       </div>
     """

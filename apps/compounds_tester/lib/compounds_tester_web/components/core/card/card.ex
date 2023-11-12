@@ -21,30 +21,18 @@ defmodule CompoundsTesterWeb.Core.Card do
   slot :card_content
   slot :card_footer
   slot :inner_block
-  attr :custom_style, :string, default: nil
+  attr :class, :string, default: nil
 
   def card(assigns) do
     assigns =
-      assign(assigns, style: "rounded-md shadow-md flex flex-col justify-between bg-white p-4")
+      assign(assigns, style: "rounded-md shadow-md flex flex-col justify-between items-center bg-white p-4 h-56")
 
     ~H"""
-    <div class={Tails.classes([@style, @custom_style])}>
-      <div>
+    <div class={Tails.classes([@style, @class])}>
         <%= render_slot(@card_header) %>
-      </div>
-
-      <div>
         <%= render_slot(@card_content) %>
-      </div>
-
-      <div>
         <%= render_slot(@card_footer) %>
-      </div>
-      
-      <div>
         <%= render_slot(@inner_block) %>
-      </div>
-
     </div>
     """
   end

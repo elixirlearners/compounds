@@ -5,7 +5,7 @@ defmodule CompoundsTesterWeb.Core.Card.CardDescription do
   A description for the card component.
 
   # Attributes:
-  * `custom_style` - User defined TailwindCSS classes. This will be merge with the default class string.
+  * `class` - User defined TailwindCSS classes. This will be merge with the default class string.
 
   # Slots:
   - `inner_block` - The Phoenix default slot. Components passed in not matching the named slot will be rendered here.
@@ -25,14 +25,14 @@ defmodule CompoundsTesterWeb.Core.Card.CardDescription do
   """
 
   slot :inner_block
-  attr :custom_style, :string, default: nil
+  attr :class, :string, default: nil
 
   def card_description(assigns) do
     assigns = assign(assigns, style: "text-gray-700")
 
 
     ~H"""
-    <div class={Tails.classes([@style, @custom_style])}>
+    <div class={Tails.classes([@style, @class])}>
       <%= render_slot(@inner_block) %>
     </div>
     """

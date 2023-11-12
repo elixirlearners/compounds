@@ -10,6 +10,7 @@ defmodule CompoundsTesterWeb.Home do
   import CompoundsTesterWeb.Core.Card.CardTitle
   import CompoundsTesterWeb.Core.Card.CardDescription
   import CompoundsTesterWeb.Core.Card.CardContent
+  import CompoundsTesterWeb.Core.Card.CardFooter
 
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
@@ -27,7 +28,13 @@ defmodule CompoundsTesterWeb.Home do
             Card Description
           </.card_description>
         </.card_header>
+        <.card_content>
+          Some content here
         </.card_content>
+        <.card_footer class="flex flex-row w-full justify-between px-4">
+          <button class="rounded-md px-3 py-1 bg-slate-900 text-white font-medium hover:bg-stone-700 transition ease-in">Accept</button>
+          <button class="rounded-md px-3 py-1 bg-slate-900 text-white font-medium hover:bg-stone-700 transition ease-in">Decline</button>
+        </.card_footer>
       </.card>
     </div>
     """
