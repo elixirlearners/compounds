@@ -14,12 +14,13 @@ defmodule CompoundsTesterWeb.Core.Card do
 
     # Slots:
     * `card_header` - The top header. 
-    * `inner_block` - The main content of the card. This is a special Phoenix slot, everything not matching the named slots will be rendered here.
+    * `card_content` - The main content of the card.
     * `card_footer` - The card's footer, often used for buttons / actions. 
   """
   slot :card_header
-  slot :inner_block
+  slot :card_content
   slot :card_footer
+  slot :inner_block
   attr :custom_style, :string, default: nil
 
   def card(assigns) do
@@ -33,12 +34,17 @@ defmodule CompoundsTesterWeb.Core.Card do
       </div>
 
       <div>
-        <%= render_slot(@inner_block) %>
+        <%= render_slot(@card_content) %>
       </div>
 
       <div>
         <%= render_slot(@card_footer) %>
       </div>
+      
+      <div>
+        <%= render_slot(@inner_block) %>
+      </div>
+
     </div>
     """
   end

@@ -9,6 +9,7 @@ defmodule CompoundsTesterWeb.Home do
   import CompoundsTesterWeb.Core.Card.CardHeader
   import CompoundsTesterWeb.Core.Card.CardTitle
   import CompoundsTesterWeb.Core.Card.CardDescription
+  import CompoundsTesterWeb.Core.Card.CardContent
 
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
@@ -26,6 +27,7 @@ defmodule CompoundsTesterWeb.Home do
             Card Description
           </.card_description>
         </.card_header>
+        </.card_content>
       </.card>
     </div>
     """
