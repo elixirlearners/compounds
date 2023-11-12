@@ -1,19 +1,29 @@
 defmodule CompoundsTesterWeb.Core.Checkbox do
-  @moduledoc """
-    A simple checkbox component.
-  """
-  
   use Phoenix.Component
   alias Phoenix.LiveView.JS
 
+  @doc """
+    A simple checkbox component.
+
+    # Attributes:
+    * `checked` - A boolean that determines whether the checkbox is checked or not. 
+    * `custom_style` - A TailwindCSS class string, this will be merged with the default class string. 
+
+    # Example:
+    ```
+    <.checkbox checked={true} class="rounded-md w-8 h-8 border-4 border-green-600" />
+    ```
+
+  """
+
   attr :checked, :boolean, default: false
-  attr :class, :string, default: nil
+  attr :custom_style, :string, default: nil
 
   def checkbox(assigns) do
-    assigns = assign(assigns, style: "border-2 border-slate-200")
+    assigns = assign(assigns, style: "rounded border border-slate-300")
 
     ~H"""
-    <input class={Tails.classes([@style, @class])} type="checkbox" checked={@checked} />
+    <input class={Tails.classes([@style, @custom_style])} type="checkbox" checked={@checked} />
     """
   end
 end
