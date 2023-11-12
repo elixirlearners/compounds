@@ -24,13 +24,23 @@ defmodule CompoundsTesterWeb.Home do
           </.card_description>
         </.card_header>
         <.card_content>
-          Some content here
+        <form class="space-y-4"> 
+        <div>
+          <label>Could we have your cookies?</label>
+          <input class="border rounded w-full"/>
+          </div>
+          <div>
+          <label>Pretty please?</label>
+          <input class="border rounded w-full"/>
+          </div>
+        </form>
+
         </.card_content>
-        <.card_footer class="flex flex-row w-full justify-between px-4">
-          <button class="rounded-md px-3 py-1 bg-slate-900 text-white font-medium hover:bg-stone-700 transition ease-in">
+        <.card_footer class="flex flex-row w-full justify-between">
+          <button class="rounded-md px-3 py-1 bg-slate-900 text-white font-medium hover:bg-stone-700 transition ease-out duration-200">
             Accept
           </button>
-          <button class="rounded-md px-3 py-1 bg-slate-900 text-white font-medium hover:bg-stone-700 transition ease-in">
+          <button class="rounded-md px-3 py-1 bg-slate-900 text-white font-medium hover:bg-stone-700 transition ease-out duration-200">
             Decline
           </button>
         </.card_footer>

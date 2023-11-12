@@ -1,6 +1,7 @@
 defmodule CompoundsTesterWeb.Core.Card do
   @moduledoc """
-    A simple card component.
+    The card component and it's sub-components.
+    TODO document the intention of this component.
   """
 
   use Phoenix.Component
@@ -26,7 +27,7 @@ defmodule CompoundsTesterWeb.Core.Card do
   def card(assigns) do
     assigns =
       assign(assigns,
-        style: "rounded-md shadow-md flex flex-col justify-between items-center bg-white p-4 h-56"
+        style: "rounded-md shadow-md border flex flex-col justify-between bg-white p-8 space-y-8"
       )
 
     ~H"""
@@ -147,7 +148,7 @@ defmodule CompoundsTesterWeb.Core.Card do
   attr :class, :string, default: nil
 
   def card_description(assigns) do
-    assigns = assign(assigns, style: "text-gray-700")
+    assigns = assign(assigns, style: "text-gray-700 text-sm")
 
     ~H"""
     <div class={Tails.classes([@style, @class])}>
