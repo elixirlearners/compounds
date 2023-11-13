@@ -30,7 +30,7 @@ defmodule Compounds.Input do
   def input(assigns) do
     assigns =
       assign(assigns,
-        style: "focus:outline-0 m-1 p-0 shadow-none text-sm bg-transparent border-0 rounded-none width-full min-w-0 appearance-none" 
+        style: "focus:outline-none focus:ring-0 m-1 p-0 shadow-none text-sm bg-transparent border-0 rounded-none width-full min-w-0 appearance-none" 
       )
 
     ~H"""
@@ -105,7 +105,7 @@ defmodule Compounds.Input do
   def input_label(assigns) do
     assigns = assign(assigns, style: """
       inline-flex h-full items-center pointer-events-none m-0
-      px-0 py-[8pt] text-[#888] bg-[#fafafa] 
+      py-0 px-[8pt] text-[#888] bg-[#fafafa] 
       border-solid border border-[#eaeaea]
       """ 
       <>
