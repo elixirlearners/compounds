@@ -55,10 +55,11 @@ defmodule Mix.Tasks.Compound.Gen do
   end
 
   defp generate(template_file, assigns) do
-    { result, _bindings } = 
+    result = 
       Path.join(get_templates_dir(), template_file)
-      |> EEx.compile_file
-      |> Code.eval_quoted(assigns: assigns)
+      |> File.read!
+      # |> EEx.compile_file
+      # |> Code.eval_quoted(assigns: assigns)
     destination = 
     get_and_create_comp_dir()
     |> Path.join(template_file)

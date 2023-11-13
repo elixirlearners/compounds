@@ -6,6 +6,7 @@ defmodule CompoundsTesterWeb.Home do
   use Phoenix.LiveView
   import CompoundsTesterWeb.Core.Checkbox
   import CompoundsTesterWeb.Core.Card
+  import Compounds.Input
 
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
@@ -14,6 +15,30 @@ defmodule CompoundsTesterWeb.Home do
   def render(assigns) do
     ~H"""
     <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full">
+      <div class="col-span-6">
+        <.input>
+          <:label_right>
+            Label Right
+          </:label_right>
+        </.input>
+      </div>
+      <div class="col-span-6">
+        <.input>
+          <:label_left>
+            Label Left
+          </:label_left>
+        </.input>
+      </div>
+      <div class="col-span-6">
+        <.input>
+          <:label_left>
+            Label Left
+          </:label_left>
+          <:label_right>
+            Label Right
+          </:label_right>
+        </.input>
+      </div>
       <.card>
         <.card_header>
           <.card_title>
