@@ -6,11 +6,7 @@ defmodule CompoundsTesterWeb.Home do
   """
 
   use Phoenix.LiveView
-  import Compounds.Card
-  import Compounds.Checkbox
-  import Compounds.ClientButton
-  import Compounds.Dropdown
-  import Compounds.Input
+  import Compounds.Tabs
 
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
@@ -21,9 +17,8 @@ defmodule CompoundsTesterWeb.Home do
     <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full gap-10">
       <div class="col-span-6">
         <Compounds.Dropdown.dropdown id="my-dropdown">
-          <:trigger>
-            Open
-          </:trigger>
+          <:trigger></:trigger>
+          Open
           <Compounds.Dropdown.item_group>
             <Compounds.Dropdown.item>
               Logged in as <br />
@@ -63,36 +58,52 @@ defmodule CompoundsTesterWeb.Home do
         </Compounds.Dropdown.dropdown>
       </div>
 
-      <.card>
-        <.card_header>
-          <.card_title>
-            Card Title
-          </.card_title>
-          <.card_description>
-            Card Description
-          </.card_description>
-        </.card_header>
-        <.card_content>
-          <form class="space-y-4">
-            <div>
-              <label>Could we have your cookies?</label>
-              <input class="border rounded w-full" />
-            </div>
-            <div>
-              <label>Pretty please?</label>
-              <input class="border rounded w-full" />
-            </div>
-          </form>
-        </.card_content>
-        <.card_footer class="flex flex-row w-full justify-between">
-          <button class="rounded-md px-3 py-1 bg-slate-900 text-white font-medium hover:bg-stone-700 transition ease-out duration-200">
-            Accept
-          </button>
-          <button class="rounded-md px-3 py-1 bg-slate-900 text-white font-medium hover:bg-stone-700 transition ease-out duration-200">
-            Decline
-          </button>
-        </.card_footer>
-      </.card>
+      <div class="col-span-2">
+        <.tabs active_id="1">
+          <.tabs_header>
+            <.tab id="1">
+              <Compounds.Icon.icon src="/images/logo.svg" />
+              <p>Tab 1</p>
+            </.tab>
+            <.tab id="2" disabled={true}>
+              Tab 2
+            </.tab>
+            <.tab id="3">
+              Tab 3
+            </.tab>
+            <.tab id="4">
+              Tab 4
+            </.tab>
+            <.tab id="5">
+              Tab 5
+            </.tab>
+            <.tab id="6">
+              Tab 6
+            </.tab>
+          </.tabs_header>
+
+          <.tabs_content>
+            <.content id="1">
+              Tab 1 content
+            </.content>
+            <.content id="2">
+              Tab 2 content
+            </.content>
+            <.content id="3">
+              Tab 3 content
+            </.content>
+            <.content id="4">
+              Tab 4 content
+            </.content>
+            <.content id="5">
+              Tab 5 content
+            </.content>
+            <.content id="6">
+              Tab 6 content
+            </.content>
+          </.tabs_content>
+        </.tabs>
+      </div>
     </div>
     """
   end

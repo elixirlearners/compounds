@@ -11,7 +11,7 @@ defmodule Compounds.Input do
     An input component.
 
     # Attributes:
-    * `custom_style` - User defined TailwindCSS classes. This will be merge with the default class string.
+    * `class` - User defined TailwindCSS classes. This will be merge with the default class string.
 
     # Slots:
     * `label_right` - Label to be placed to the right of the input.

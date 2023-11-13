@@ -1,3 +1,5 @@
+# This heading pleases markdown lint :(
+
 MIT License
 
 Copyright (c) 2020 Refactoring UI Inc.

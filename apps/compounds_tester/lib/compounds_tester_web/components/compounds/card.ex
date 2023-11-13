@@ -33,8 +33,8 @@ defmodule Compounds.Card do
     ~H"""
     <div class={Tails.classes([@style, @class])}>
       <%= render_slot(@card_header) %>
-      <%= render_slot(@card_content) %>
       <%= render_slot(@card_footer) %>
+      <%= render_slot(@card_content) %>
       <%= render_slot(@inner_block) %>
     </div>
     """
