@@ -1,7 +1,6 @@
-defmodule CompoundsTesterWeb.Core.DialogTrigger do
+defmodule Compounds.DialogTrigger do
   use Phoenix.Component
   alias Phoenix.LiveView.JS
-
 
   @doc """
     A DialogTrigger is wrapper around a `Diaglog` and a `Trigger`.
@@ -14,7 +13,7 @@ defmodule CompoundsTesterWeb.Core.DialogTrigger do
 
     # Attributes:
     * `class` - A TailwindCSS class string, this will be merged with the default class string.
-`   * TODO: target_anchor, position, offset, flipping?, min_padding, click_out
+  `   * TODO: target_anchor, position, offset, flipping?, min_padding, click_out
   """
 
   slot :trigger, required: true
@@ -22,10 +21,9 @@ defmodule CompoundsTesterWeb.Core.DialogTrigger do
 
   def popover(assigns) do
     ~H"""
-      <div>
-        <%= render_slot(@trigger) %>
-      </div>
+    <div>
+      <%= render_slot(@trigger) %>
+    </div>
     """
   end
-
 end

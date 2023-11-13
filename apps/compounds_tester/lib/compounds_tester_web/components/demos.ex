@@ -7,7 +7,7 @@ defmodule CompoundsTesterWeb.Demos do
 
   use Phoenix.Component
   alias Phoenix.LiveView.JS
-  import CompoundsTesterWeb.Core.Checkbox
+  import Compounds.Checkbox
 
   @doc """
     An example of how we can pass in CSS as a String attribute.

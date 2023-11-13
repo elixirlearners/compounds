@@ -1,4 +1,4 @@
-defmodule CompoundsTesterWeb.Core.Toast do
+defmodule Compounds.Toast do
   @moduledoc """
     A simple toast component.
   """

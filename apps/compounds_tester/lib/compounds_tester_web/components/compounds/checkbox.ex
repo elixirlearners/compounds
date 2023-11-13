@@ -1,4 +1,4 @@
-defmodule CompoundsTesterWeb.Core.Checkbox do
+defmodule Compounds.Checkbox do
   use Phoenix.Component
   alias Phoenix.LiveView.JS
 

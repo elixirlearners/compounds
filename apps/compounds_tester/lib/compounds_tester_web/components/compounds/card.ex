@@ -1,4 +1,4 @@
-defmodule CompoundsTesterWeb.Core.Card do
+defmodule Compounds.Card do
   @moduledoc """
     The card component and it's sub-components.
     TODO document the intention of this component.
@@ -157,7 +157,6 @@ defmodule CompoundsTesterWeb.Core.Card do
     """
   end
 
-
   @doc """
     The main content for the Card component.
 
@@ -171,19 +170,16 @@ defmodule CompoundsTesterWeb.Core.Card do
   slot :inner_block
   attr :class, :string, default: nil
 
-
   def card_content(assigns) do
     assigns =
       assign(assigns, style: "")
 
     ~H"""
-      <div class={Tails.classes([@style, @class])}>
-        <%= render_slot(@inner_block) %>
-      </div>
+    <div class={Tails.classes([@style, @class])}>
+      <%= render_slot(@inner_block) %>
+    </div>
     """
   end
-
-
 
   @doc """
     The footer for the Card component.
@@ -207,6 +203,4 @@ defmodule CompoundsTesterWeb.Core.Card do
     </div>
     """
   end
-
-
 end

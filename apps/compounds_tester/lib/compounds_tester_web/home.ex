@@ -4,8 +4,9 @@ defmodule CompoundsTesterWeb.Home do
   """
 
   use Phoenix.LiveView
-  import CompoundsTesterWeb.Core.Checkbox
-  import CompoundsTesterWeb.Core.Card
+  import Compounds.Card
+  import Compounds.Checkbox
+  import Compounds.ClientButton
   import Compounds.Input
 
   def mount(_params, _session, socket) do
@@ -14,7 +15,7 @@ defmodule CompoundsTesterWeb.Home do
 
   def render(assigns) do
     ~H"""
-    <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full">
+    <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full gap-10">
       <div class="col-span-6">
         <.input>
           <:label_right>
@@ -39,6 +40,7 @@ defmodule CompoundsTesterWeb.Home do
           </:label_right>
         </.input>
       </div>
+
       <.card>
         <.card_header>
           <.card_title>
@@ -49,16 +51,16 @@ defmodule CompoundsTesterWeb.Home do
           </.card_description>
         </.card_header>
         <.card_content>
-        <form class="space-y-4"> 
-        <div>
-          <label>Could we have your cookies?</label>
-          <input class="border rounded w-full"/>
-          </div>
-          <div>
-          <label>Pretty please?</label>
-          <input class="border rounded w-full"/>
-          </div>
-        </form>
+          <form class="space-y-4">
+            <div>
+              <label>Could we have your cookies?</label>
+              <input class="border rounded w-full" />
+            </div>
+            <div>
+              <label>Pretty please?</label>
+              <input class="border rounded w-full" />
+            </div>
+          </form>
         </.card_content>
         <.card_footer class="flex flex-row w-full justify-between">
           <button class="rounded-md px-3 py-1 bg-slate-900 text-white font-medium hover:bg-stone-700 transition ease-out duration-200">
@@ -69,7 +71,6 @@ defmodule CompoundsTesterWeb.Home do
           </button>
         </.card_footer>
       </.card>
-
     </div>
     """
   end
