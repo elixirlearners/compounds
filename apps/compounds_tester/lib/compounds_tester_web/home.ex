@@ -59,7 +59,6 @@ defmodule CompoundsTesterWeb.Home do
           <input class="border rounded w-full"/>
           </div>
         </form>
-
         </.card_content>
         <.card_footer class="flex flex-row w-full justify-between">
           <button class="rounded-md px-3 py-1 bg-slate-900 text-white font-medium hover:bg-stone-700 transition ease-out duration-200">
@@ -70,6 +69,7 @@ defmodule CompoundsTesterWeb.Home do
           </button>
         </.card_footer>
       </.card>
+
     </div>
     """
   end
