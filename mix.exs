@@ -1,4 +1,4 @@
-defmodule Compounds.MixProject do
+defmodule CompoundsUmbrella.MixProject do
   use Mix.Project
 
   def project do

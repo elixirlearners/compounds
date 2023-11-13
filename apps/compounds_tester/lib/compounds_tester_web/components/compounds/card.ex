@@ -8,15 +8,15 @@ defmodule Compounds.Card do
   alias Phoenix.LiveView.JS
 
   @doc """
-    A card component. 
+    A card component.
 
     # Attributes:
     * `custom_style` - User defined TailwindCSS classes. This will be merge with the default class string.
 
     # Slots:
-    * `card_header` - The top header. 
+    * `card_header` - The top header.
     * `card_content` - The main content of the card.
-    * `card_footer` - The card's footer, often used for buttons / actions. 
+    * `card_footer` - The card's footer, often used for buttons / actions.
   """
   slot :card_header
   slot :card_content
@@ -161,7 +161,7 @@ defmodule Compounds.Card do
     The main content for the Card component.
 
     # Slots:
-    * `inner_block` - The default slot. 
+    * `inner_block` - The default slot.
 
     # Attributes:
     * `class` - User defined TailwindCSS classes. This will be merge with the default class string.
@@ -185,7 +185,7 @@ defmodule Compounds.Card do
     The footer for the Card component.
 
     # Slots:
-    * `inner_block` - The default slot. 
+    * `inner_block` - The default slot.
 
     # Attributes:
     * `class` - User defined TailwindCSS classes. This will be merge with the default class string.

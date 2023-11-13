@@ -5,7 +5,7 @@ defmodule Compounds.DialogTrigger do
   @doc """
     A DialogTrigger is wrapper around a `Diaglog` and a `Trigger`.
     The `Trigger` is an element that is clicked to activates the Dialog.
-    The `Dialog` is a window containing some information and/or actions. 
+    The `Dialog` is a window containing some information and/or actions.
 
     # Slots:
     * `trigger` - The trigger that will activate the dialog.

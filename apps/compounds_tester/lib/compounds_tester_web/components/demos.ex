@@ -18,7 +18,7 @@ defmodule CompoundsTesterWeb.Demos do
       .checkbox_a {
         height: 2rem;
         width: 2rem;
-        border: 4px solid blue; 
+        border: 4px solid blue;
         border-radius: 8px
       }
     """
@@ -27,7 +27,7 @@ defmodule CompoundsTesterWeb.Demos do
       .checkbox_b {
         height: 2rem;
         width: 2rem;
-        border: 4px solid red; 
+        border: 4px solid red;
         border-radius: 8px
       }
     """
@@ -35,7 +35,7 @@ defmodule CompoundsTesterWeb.Demos do
     # Instead of passing in the styles directly,
     # we must first add them to assigns, then access them through the @ syntax.
     # This is so that LiveView can track changes to these variables and re-render.
-    # Even though in this case the styles are static, without doing this LiveView will throw warnings. 
+    # Even though in this case the styles are static, without doing this LiveView will throw warnings.
     assigns = assign(assigns, style_a: style_a, style_b: style_b)
 
     ~H"""

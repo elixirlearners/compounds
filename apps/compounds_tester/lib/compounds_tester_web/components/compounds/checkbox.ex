@@ -6,8 +6,8 @@ defmodule Compounds.Checkbox do
     A simple checkbox component.
 
     # Attributes:
-    * `checked` - A boolean that determines whether the checkbox is checked or not. 
-    * `custom_style` - A TailwindCSS class string, this will be merged with the default class string. 
+    * `checked` - A boolean that determines whether the checkbox is checked or not.
+    * `custom_style` - A TailwindCSS class string, this will be merged with the default class string.
 
     # Example:
     ```
