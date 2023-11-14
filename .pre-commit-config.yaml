@@ -2,19 +2,19 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
 -   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v3.2.0
+    rev: v4.5.0
     hooks:
     -   id: trailing-whitespace
     -   id: end-of-file-fixer
     -   id: check-yaml
     -   id: check-added-large-files
 -   repo: https://gitlab.com/jvenom/elixir-pre-commit-hooks
-    rev: v1.0.0 # replace with the version you want to use
+    rev: v1.2.0 # replace with the version you want to use
     hooks: # specify the hooks you want to use here
       - id: mix-format
       - id: mix-test
--   repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.37.0
-    hooks:
-      - id: markdownlint
-
+-   repo: https://github.com/elixirlearners/pre-commit-hooks.git
+    rev: c13b915408a40ec30ec811a4eb6cb807dfd2b01a # replace with the version you want to use
+    hooks: # specify the hooks you want to use here
+      - id: mix-credo
+      - id: mix-coveralls
