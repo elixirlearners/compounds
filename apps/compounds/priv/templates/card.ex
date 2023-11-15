@@ -42,7 +42,7 @@ defmodule Compounds.Core.Card do
       <div class={@class_footer}>
         <%= render_slot(@footer) || "Card Footer" %>
       </div>
-    <div>
+    </div>
     """
   end
 end

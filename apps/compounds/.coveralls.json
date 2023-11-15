@@ -1,0 +1,16 @@
+{
+  "skip_files": [
+    "apps/compounds_tester"
+  ],
+  "terminal_options": {
+    "print_files": false
+  },
+  "coverage_options": {
+    "treat_no_relevant_lines_as_covered": true,
+    "output_dir": "./cover/",
+    "template_path": "./cover/template/",
+    "minimum_coverage": 90,
+    "xml_base_dir": "./cover/xml/reports/",
+    "html_filter_full_covered": true
+  }
+}

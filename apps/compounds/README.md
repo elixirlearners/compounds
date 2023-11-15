@@ -1,6 +1,6 @@
 # Compounds
 
-**TODO: Add description**
+TODO: Add description
 
 ## Installation
 

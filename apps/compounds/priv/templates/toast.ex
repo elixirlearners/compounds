@@ -1,5 +1,8 @@
 defmodule ToastComponent do
-  def my_<%= @function_name %>() do
+  @moduledoc """
+  TODO
+  """
+  def hello_world do
     IO.puts("Hello, world.")
   end
 end
