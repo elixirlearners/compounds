@@ -1,4 +1,6 @@
 defmodule CompoundsTesterWeb.Home do
+  use CompoundsTesterWeb, :live_view
+
   @moduledoc """
   The main page of the application, used to display all components in one showcase.
   """
@@ -7,6 +9,7 @@ defmodule CompoundsTesterWeb.Home do
   import Compounds.Card
   import Compounds.Checkbox
   import Compounds.ClientButton
+  import Compounds.Dropdown
   import Compounds.Input
 
   def mount(_params, _session, socket) do
@@ -17,28 +20,47 @@ defmodule CompoundsTesterWeb.Home do
     ~H"""
     <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full gap-10">
       <div class="col-span-6">
-        <.input>
-          <:label_right>
-            Label Right
-          </:label_right>
-        </.input>
-      </div>
-      <div class="col-span-6">
-        <.input>
-          <:label_left>
-            Label Left
-          </:label_left>
-        </.input>
-      </div>
-      <div class="col-span-6">
-        <.input>
-          <:label_left>
-            Label Left
-          </:label_left>
-          <:label_right>
-            Label Right
-          </:label_right>
-        </.input>
+        <Compounds.Dropdown.dropdown id="my-dropdown">
+          <:trigger>
+            Open
+          </:trigger>
+          <Compounds.Dropdown.item_group>
+            <Compounds.Dropdown.item>
+              Logged in as <br />
+              <span class="font-bold">
+                root@localhost
+              </span>
+            </Compounds.Dropdown.item>
+          </Compounds.Dropdown.item_group>
+          <Compounds.Dropdown.item_group>
+            <Compounds.Dropdown.link_item href={~p"/"}>
+              <:icon>
+                <CompoundsTesterWeb.CoreComponents.icon
+                  name="hero-wrench-screwdriver"
+                  class="h-4 w-4"
+                />
+              </:icon>
+              Admin Dashboard
+            </Compounds.Dropdown.link_item>
+            <Compounds.Dropdown.link_item href={~p"/"}>
+              <:icon>
+                <CompoundsTesterWeb.CoreComponents.icon name="hero-shopping-cart" class="h-4 w-4" />
+              </:icon>
+              My Orders
+            </Compounds.Dropdown.link_item>
+            <Compounds.Dropdown.link_item href={~p"/"}>
+              <:icon>
+                <CompoundsTesterWeb.CoreComponents.icon name="hero-cog-8-tooth" class="h-4 w-4" />
+              </:icon>
+              Settings
+            </Compounds.Dropdown.link_item>
+          </Compounds.Dropdown.item_group>
+          <Compounds.Dropdown.item_group>
+            <Compounds.Dropdown.link_item href={~p"/"}>
+              Log out
+            </Compounds.Dropdown.link_item>
+          </Compounds.Dropdown.item_group>
+        </Compounds.Dropdown.dropdown>
       </div>
 
       <.card>
