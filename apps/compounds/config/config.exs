@@ -1,2 +1,2 @@
 config :compound,
-  project_root: File.cwd!
+  project_root: File.cwd!()

@@ -8,7 +8,7 @@ defmodule Mix.Tasks.Compound.Gen do
     all: :boolean,
     card: :boolean,
     input: :boolean,
-    toast: :boolean,
+    toast: :boolean
   ]
 
   @default_opts []
@@ -22,55 +22,62 @@ defmodule Mix.Tasks.Compound.Gen do
       )
     end
 
-    {:ok, opts, _args} = 
+    {:ok, opts, _args} =
       args
       |> parse_args
       |> validate_args!
+
     if Keyword.has_key?(opts, :all) do
       generate_all(opts)
     else
       opts
-        |> Enum.each(&generate_components/1)
+      |> Enum.each(&generate_components/1)
     end
   end
 
   defp generate_all(opts) do
     if opts[:all] do
-      for key <- Keyword.keys(@switches), key != :all  do
+      for key <- Keyword.keys(@switches), key != :all do
         generate_components({key, true})
       end
     end
   end
 
   defp generate_components({:card, true}) do
-    generate("card.ex", [function_name: "test"])
+    generate("card.ex", function_name: "test")
   end
 
   defp generate_components({:input, true}) do
-    generate("input.ex", [function_name: "test"])
+    generate("input.ex", function_name: "test")
   end
 
   defp generate_components({:toast, true}) do
-    generate("toast.ex", [function_name: "test"])
+    generate("toast.ex", function_name: "test")
   end
 
   defp generate(template_file, assigns) do
-    result = 
+    result =
       Path.join(get_templates_dir(), template_file)
-      |> File.read!
-      # |> EEx.compile_file
-      # |> Code.eval_quoted(assigns: assigns)
-    destination = 
-    get_and_create_comp_dir()
-    |> Path.join(template_file)
-    Mix.Shell.IO.info("Creating " <> IO.ANSI.green() <> template_file <> IO.ANSI.reset() <> " at #{destination}")
+      |> File.read!()
+
+    # |> EEx.compile_file
+    # |> Code.eval_quoted(assigns: assigns)
+    destination =
+      get_and_create_comp_dir()
+      |> Path.join(template_file)
+
+    Mix.Shell.IO.info(
+      "Creating " <> IO.ANSI.green() <> template_file <> IO.ANSI.reset() <> " at #{destination}"
+    )
+
     if File.exists?(destination) do
       if Mix.Shell.IO.yes?("File #{destination} already exists, overwrite?") do
         File.write!(destination, result)
       end
     else
-        File.write!(destination, result)
+      File.write!(destination, result)
     end
+
     Mix.Shell.IO.info(IO.ANSI.green() <> "* " <> template_file <> IO.ANSI.reset() <> " created.")
   end
 
@@ -79,6 +86,7 @@ defmodule Mix.Tasks.Compound.Gen do
 
   defp get_and_create_comp_dir do
     file_path = get_comp_dir()
+
     if File.exists?(file_path) do
       file_path
     else
@@ -88,15 +96,16 @@ defmodule Mix.Tasks.Compound.Gen do
   end
 
   defp get_comp_dir do
-    "lib/#{Keyword.get(Mix.Project.config(), :app)}_web/components/compounds" 
+    "lib/#{Keyword.get(Mix.Project.config(), :app)}_web/components/compounds"
   end
-
 
   defp parse_args(args) do
     {parsed, args, _invalid} = OptionParser.parse(args, strict: @switches)
+
     merged_parsed =
       @default_opts
       |> Keyword.merge(parsed)
+
     {merged_parsed, args}
   end
 

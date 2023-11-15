@@ -8,16 +8,16 @@ defmodule Compounds.Input do
   alias Phoenix.LiveView.JS
 
   @doc """
-    An input component. 
+    An input component.
 
     # Attributes:
     * `custom_style` - User defined TailwindCSS classes. This will be merge with the default class string.
 
     # Slots:
-    * `label_right` - Label to be placed to the right of the input. 
+    * `label_right` - Label to be placed to the right of the input.
     * `label_left` - Label to be placed to the left of the input.
-    * `icon_right` - Icon to be placed to the right of the input. 
-    * `icon_left` - Icon to be placed to the left of the input. 
+    * `icon_right` - Icon to be placed to the right of the input.
+    * `icon_left` - Icon to be placed to the left of the input.
   """
   slot :label_right
   slot :label_left
@@ -43,7 +43,7 @@ defmodule Compounds.Input do
           </.label_left>
         <% end %>
         <div class={"inline-flex align-middle items-center h-full flex-1 select-none border rounded-md border-solid border-[#eaeaea]
-          transition-[border] duration-200 ease-in-out " 
+          transition-[border] duration-200 ease-in-out "
             <> if length(@label_right) > 0 do " rounded-tr-none rounded-br-none "  else "" end
             <> if length(@label_left) > 0 do " rounded-tl-none rounded-bl-none "  else "" end
           }>
@@ -113,7 +113,7 @@ defmodule Compounds.Input do
         style:
           """
           inline-flex h-full items-center pointer-events-none m-0
-          py-0 px-[8pt] text-[#888] bg-[#fafafa] 
+          py-0 px-[8pt] text-[#888] bg-[#fafafa]
           border-solid border border-[#eaeaea]
           """ <>
             if assigns.is_right? do

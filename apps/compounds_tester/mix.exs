@@ -13,7 +13,8 @@ defmodule CompoundsTester.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
@@ -36,7 +37,7 @@ defmodule CompoundsTester.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:compounds, path: "../compounds"},
+      # {:compounds, path: "../compounds"},
       {:tails, "~> 0.1.5"},
       {:phoenix, "~> 1.7.9"},
       {:phoenix_ecto, "~> 4.4"},

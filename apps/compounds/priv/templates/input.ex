@@ -8,29 +8,30 @@ defmodule Compounds.Input do
   alias Phoenix.LiveView.JS
 
   @doc """
-    An input component. 
+    An input component.
 
     # Attributes:
     * `custom_style` - User defined TailwindCSS classes. This will be merge with the default class string.
 
     # Slots:
-    * `label_right` - Label to be placed to the right of the input. 
+    * `label_right` - Label to be placed to the right of the input.
     * `label_left` - Label to be placed to the left of the input.
-    * `icon_right` - Icon to be placed to the right of the input. 
-    * `icon_left` - Icon to be placed to the left of the input. 
+    * `icon_right` - Icon to be placed to the right of the input.
+    * `icon_left` - Icon to be placed to the left of the input.
   """
-  slot :label_right
-  slot :label_left
-  slot :icon_right
-  slot :icon_left
-  attr :class, :string, default: nil
-  attr :type, :string, default: "text"
-  attr :placeholder, :string, default: "Placeholder"
+  slot(:label_right)
+  slot(:label_left)
+  slot(:icon_right)
+  slot(:icon_left)
+  attr(:class, :string, default: nil)
+  attr(:type, :string, default: "text")
+  attr(:placeholder, :string, default: "Placeholder")
 
   def input(assigns) do
     assigns =
       assign(assigns,
-        style: "m-1 p-0 text-sm bg-transparent border-nonei outline-none rounded-none width-full min-w-0" 
+        style:
+          "m-1 p-0 text-sm bg-transparent border-nonei outline-none rounded-none width-full min-w-0"
       )
 
     ~H"""
@@ -48,8 +49,8 @@ defmodule Compounds.Input do
     """
   end
 
-  slot :inner_block
-  attr :class, :string, default: nil
+  slot(:inner_block)
+  attr(:class, :string, default: nil)
 
   def label_right(assigns) do
     assigns = assign(assigns, style: "text-2xl font-bold text-gray-700")
@@ -61,8 +62,8 @@ defmodule Compounds.Input do
     """
   end
 
-  slot :inner_block
-  attr :class, :string, default: nil
+  slot(:inner_block)
+  attr(:class, :string, default: nil)
 
   def label_left(assigns) do
     assigns = assign(assigns, style: "rounded-tl-0 rounded-bl-0")
@@ -74,8 +75,8 @@ defmodule Compounds.Input do
     """
   end
 
-  slot :inner_block
-  attr :class, :string, default: nil
+  slot(:inner_block)
+  attr(:class, :string, default: nil)
 
   def icon_right(assigns) do
     assigns = assign(assigns, style: "text-2xl font-bold text-gray-700")
@@ -87,8 +88,8 @@ defmodule Compounds.Input do
     """
   end
 
-  slot :inner_block
-  attr :class, :string, default: nil
+  slot(:inner_block)
+  attr(:class, :string, default: nil)
 
   def icon_left(assigns) do
     assigns = assign(assigns, style: "text-2xl font-bold text-gray-700")
@@ -99,5 +100,4 @@ defmodule Compounds.Input do
     </div>
     """
   end
-
 end
