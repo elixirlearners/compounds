@@ -26,3 +26,7 @@ repos:
     hooks: # specify the hooks you want to use here
       - id: mix-coveralls
       - id: mix-credo
+-   repo: https://github.com/executablebooks/mdformat.git
+    rev: 0.7.17 # replace with the version you want to use
+    hooks: # specify the hooks you want to use here
+      - id: mdformat
