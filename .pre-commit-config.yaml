@@ -26,7 +26,13 @@ repos:
     hooks: # specify the hooks you want to use here
       - id: mix-coveralls
       - id: mix-credo
--   repo: https://github.com/executablebooks/mdformat.git
-    rev: 0.7.17 # replace with the version you want to use
-    hooks: # specify the hooks you want to use here
-      - id: mdformat
+-   repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.37.0
+    hooks:
+    - id: markdownlint
+      language_version: system
+# -   repo: https://github.com/executablebooks/mdformat.git
+#     rev: 0.7.17 # replace with the version you want to use
+#     hooks: # specify the hooks you want to use here
+#       - id: mdformat
+#         language_version: system
