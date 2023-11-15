@@ -23,32 +23,97 @@ defmodule Compounds.Input do
   slot :label_left
   slot :icon_right
   slot :icon_left
+
+  slot :outer_wrapper do
+    attr :id, :string, required: false
+    attr :class, :string, required: false
+  end
+
+  slot :inner_wrapper do
+    attr :id, :string, required: false
+    attr :class, :string, required: false
+  end
+
+  slot :input_wrapper do
+    attr :id, :string, required: false
+    attr :class, :string, required: false
+  end
+
   attr :class, :string, default: nil
   attr :type, :string, default: "text"
   attr :placeholder, :string, default: "Placeholder"
+  attr :disabled, :boolean, default: false
 
   def input(assigns) do
     assigns =
       assign(assigns,
         style:
-          "focus:outline-none focus:ring-0 m-1 p-0 shadow-none text-sm bg-transparent border-0 rounded-none width-full min-w-0 appearance-none"
+          "focus:outline-none focus:ring-0 m-1 p-0 shadow-none text-sm bg-transparent border-0 rounded-none width-full min-w-0 appearance-none",
+        id: Compounds.Id.generate("")
       )
 
     ~H"""
-    <div class="inline-block box-border items-center text-sm p-0 m-0">
-      <div class="inline-flex items-center h-10">
+    <div class={
+      Keyword.get(@outer_wrapper, :class, "inline-block box-border items-center text-sm p-0 m-0")
+    }>
+      <div class={Keyword.get(@inner_wrapper, :class, "inline-flex items-center h-10")}>
         <%= if length(@label_left) > 0 do %>
           <.label_left>
             <%= render_slot(@label_left) %>
           </.label_left>
         <% end %>
-        <div class={"inline-flex align-middle items-center h-full flex-1 select-none border rounded-md border-solid border-[#eaeaea]
-          transition-[border] duration-200 ease-in-out "
-            <> if length(@label_right) > 0 do " rounded-tr-none rounded-br-none "  else "" end
-            <> if length(@label_left) > 0 do " rounded-tl-none rounded-bl-none "  else "" end
-          }>
+        <div
+          id={Keyword.get(@input_wrapper, :id, @id)}
+          class={
+            Keyword.get(
+              @input_wrapper,
+              :class,
+              "inline-flex align-middle items-center h-full flex-1 select-none border rounded-md border-solid border-[#eaeaea]" <>
+                if length(@label_right) > 0 do
+                  " rounded-tr-none rounded-br-none "
+                else
+                  ""
+                end <>
+                if length(@label_left) > 0 do
+                  " rounded-tl-none rounded-bl-none "
+                else
+                  ""
+                end <>
+                if @disabled do
+                  "bg-[#fafafa] border-[#eaeaea]"
+                else
+                  ""
+                end
+            )
+          }
+        >
           <%= render_slot(@icon_right) %>
-          <input class={Tails.classes([@style, @class])} type={@type} placeholder={@placeholder} />
+          <input
+            disabled={@disabled}
+            phx-blur={
+              JS.transition({"ease duration-200", "border-black", "border[#eaeaea]"},
+                to: "#" <> Keyword.get(@input_wrapper, :id, @id)
+              )
+            }
+            phx-focus={
+              JS.transition({"ease duration-200", "border-[#eaeaea]", "border-black"},
+                to: "#" <> Keyword.get(@input_wrapper, :id, @id)
+              )
+            }
+            class={
+              Tails.classes([
+                @style <>
+                  if @disabled do
+                    " cursor-not-allowed "
+                  else
+                    ""
+                  end,
+                @class
+              ])
+            }
+            type={@type}
+            placeholder={@placeholder}
+          />
           <%= render_slot(@icon_left) %>
         </div>
         <%= if length(@label_right) > 0 do %>
@@ -68,7 +133,7 @@ defmodule Compounds.Input do
     assigns = assign(assigns, style: "rounded-tr-0 rounded-bl-0")
 
     ~H"""
-    <.input_label class={@class}>
+    <.input_label class={Tails.classes([@style, @class])}>
       <%= render_slot(@inner_block) %>
     </.input_label>
     """
@@ -81,7 +146,7 @@ defmodule Compounds.Input do
     assigns = assign(assigns, style: "rounded-tl-0 rounded-bl-0")
 
     ~H"""
-    <.input_label is_right?={false}>
+    <.input_label class={Tails.classes([@style, @class])} is_right?={false}>
       <%= render_slot(@inner_block) %>
     </.input_label>
     """

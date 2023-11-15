@@ -10,7 +10,7 @@ defmodule CompoundsTesterWeb.Home do
   import Compounds.Checkbox
   import Compounds.ClientButton
   import Compounds.Dropdown
-  import Compounds.Input
+  alias Compounds.Input
 
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
@@ -19,6 +19,37 @@ defmodule CompoundsTesterWeb.Home do
   def render(assigns) do
     ~H"""
     <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full gap-10">
+      <div class="col-span-6">
+        <Input.input>
+          <:label_right>
+            Label Right
+          </:label_right>
+        </Input.input>
+      </div>
+      <div class="col-span-6">
+        <Input.input>
+          <:label_left>
+            Label Left
+          </:label_left>
+        </Input.input>
+      </div>
+      <div class="col-span-6">
+        <Input.input>
+          <:label_left>
+            Label Left
+          </:label_left>
+          <:label_right>
+            Label Right
+          </:label_right>
+        </Input.input>
+      </div>
+      <div class="col-span-6">
+        <Input.input disabled={true}>
+          <:label_left>
+            I'm Disabled
+          </:label_left>
+        </Input.input>
+      </div>
       <div class="col-span-6">
         <Compounds.Dropdown.dropdown id="my-dropdown">
           <:trigger>
