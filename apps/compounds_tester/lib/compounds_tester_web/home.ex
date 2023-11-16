@@ -21,6 +21,13 @@ defmodule CompoundsTesterWeb.Home do
     <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full gap-10">
       <div class="col-span-6">
         <Input.input>
+          <:input_block_label>
+            I'm a block label!
+          </:input_block_label>
+        </Input.input>
+      </div>
+      <div class="col-span-6">
+        <Input.input>
           <:label_right>
             Label Right
           </:label_right>
@@ -47,6 +54,57 @@ defmodule CompoundsTesterWeb.Home do
         <Input.input disabled={true}>
           <:label_left>
             I'm Disabled
+          </:label_left>
+        </Input.input>
+      </div>
+      <div class="col-span-6">
+        <Input.input read_only={true} placeholder="Cant edit me!">
+          <:label_left>
+            I'm read only
+          </:label_left>
+        </Input.input>
+      </div>
+      <div class="col-span-6">
+        <Input.input placeholder="Icon left">
+          <:icon_left>
+            <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
+          </:icon_left>
+        </Input.input>
+      </div>
+      <div class="col-span-6">
+        <Input.input placeholder="Icon right">
+          <:icon_right>
+            <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
+          </:icon_right>
+        </Input.input>
+      </div>
+      <div class="col-span-6">
+        <Input.input placeholder="Icon right">
+          <:icon_right>
+            <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
+          </:icon_right>
+          <:label_left>
+            Label left
+          </:label_left>
+        </Input.input>
+      </div>
+      <div class="col-span-6">
+        <Input.input placeholder="Icon right">
+          <:icon_right>
+            <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
+          </:icon_right>
+          <:label_right>
+            Label right
+          </:label_right>
+        </Input.input>
+      </div>
+      <div class="col-span-6">
+        <Input.input placeholder="Icon left">
+          <:icon_left>
+            <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
+          </:icon_left>
+          <:label_left>
+            Label left
           </:label_left>
         </Input.input>
       </div>

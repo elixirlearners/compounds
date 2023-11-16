@@ -23,6 +23,7 @@ defmodule Compounds.Input do
   slot :label_left
   slot :icon_right
   slot :icon_left
+  slot :input_block_label
 
   slot :outer_wrapper do
     attr :id, :string, required: false
@@ -43,6 +44,7 @@ defmodule Compounds.Input do
   attr :type, :string, default: "text"
   attr :placeholder, :string, default: "Placeholder"
   attr :disabled, :boolean, default: false
+  attr :read_only, :boolean, default: false
 
   def input(assigns) do
     assigns =
@@ -56,6 +58,11 @@ defmodule Compounds.Input do
     <div class={
       Keyword.get(@outer_wrapper, :class, "inline-block box-border items-center text-sm p-0 m-0")
     }>
+      <%= if length(@input_block_label) > 0 do %>
+        <.input_block_label>
+          <%= render_slot(@input_block_label) %>
+        </.input_block_label>
+      <% end %>
       <div class={Keyword.get(@inner_wrapper, :class, "inline-flex items-center h-10")}>
         <%= if length(@label_left) > 0 do %>
           <.label_left>
@@ -68,7 +75,7 @@ defmodule Compounds.Input do
             Keyword.get(
               @input_wrapper,
               :class,
-              "inline-flex align-middle items-center h-full flex-1 select-none border rounded-md border-solid border-[#eaeaea]" <>
+              "inline-flex align-middle items-center h-full flex-1 select-none border rounded-md border-solid border-accent_2" <>
                 if length(@label_right) > 0 do
                   " rounded-tr-none rounded-br-none "
                 else
@@ -80,23 +87,28 @@ defmodule Compounds.Input do
                   ""
                 end <>
                 if @disabled do
-                  "bg-[#fafafa] border-[#eaeaea]"
+                  "bg-accent_1 border-accent_2"
                 else
                   ""
                 end
             )
           }
         >
-          <%= render_slot(@icon_right) %>
+          <%= if length(@icon_left) > 0 do %>
+            <.icon_left>
+              <%= render_slot(@icon_left) %>
+            </.icon_left>
+          <% end %>
           <input
             disabled={@disabled}
+            readOnly={@read_only}
             phx-blur={
-              JS.transition({"ease duration-200", "border-black", "border[#eaeaea]"},
+              JS.transition({"ease duration-200", "border-black", "border-accent_2"},
                 to: "#" <> Keyword.get(@input_wrapper, :id, @id)
               )
             }
             phx-focus={
-              JS.transition({"ease duration-200", "border-[#eaeaea]", "border-black"},
+              JS.transition({"ease duration-200", "border-accent_2", "border-black"},
                 to: "#" <> Keyword.get(@input_wrapper, :id, @id)
               )
             }
@@ -114,7 +126,11 @@ defmodule Compounds.Input do
             type={@type}
             placeholder={@placeholder}
           />
-          <%= render_slot(@icon_left) %>
+          <%= if length(@icon_right) > 0 do %>
+            <.icon_right>
+              <%= render_slot(@icon_right) %>
+            </.icon_right>
+          <% end %>
         </div>
         <%= if length(@label_right) > 0 do %>
           <.label_right>
@@ -158,7 +174,7 @@ defmodule Compounds.Input do
   def input_block_label(assigns) do
     assigns =
       assign(assigns,
-        style: "block font-normal text-[#444] pt-0 pb-0 pr-0 pl-px mb-2 text-base leading-6"
+        style: "block font-normal text-accent_6 pt-0 pb-0 pr-0 pl-px mb-2 text-base leading-6"
       )
 
     ~H"""
@@ -178,8 +194,8 @@ defmodule Compounds.Input do
         style:
           """
           inline-flex h-full items-center pointer-events-none m-0
-          py-0 px-[8pt] text-[#888] bg-[#fafafa]
-          border-solid border border-[#eaeaea]
+          py-0 px-gap_half text-accent_4 bg-accent_1
+          border-solid border border-accent_2
           """ <>
             if assigns.is_right? do
               "rounded-tl-0 rounded-bl-0 rounded-tr-[6px] rounded-br-[6px] border-l-0"
@@ -198,11 +214,35 @@ defmodule Compounds.Input do
     """
   end
 
+  # .input-icon {
+  #   box-sizing: border-box;
+  #   display: inline-flex;
+  #   width: calc(var(--input-height) - 2px);
+  #   flex-shrink: 0;
+  #   height: 100%;
+  #   align-items: center;
+  #   justify-content: center;
+  #   margin: 0;
+  #   padding: 0;
+  #   line-height: 1;
+  #   position: relative;
+  #   cursor: ${clickable ? 'pointer' : 'default'};
+  #   pointer-events: ${clickable ? 'auto' : 'none'};
+  # }
+  # .input-icon :global(svg) {
+  #   width: calc(var(--input-height) - 2px);
+  #   height: calc(var(--input-height) - 2px);
+  #   transform: scale(0.44);
+  # }
   slot :inner_block
   attr :class, :string, default: nil
 
   def icon_right(assigns) do
-    assigns = assign(assigns, style: "mr-0")
+    assigns =
+      assign(assigns,
+        style:
+          "box-border inline-flex w-[2.5rem] shrink h-full items-center justify-center m-0 p-0 leading-none relative"
+      )
 
     ~H"""
     <div class={Tails.classes([@style, @class])}>
@@ -215,7 +255,11 @@ defmodule Compounds.Input do
   attr :class, :string, default: nil
 
   def icon_left(assigns) do
-    assigns = assign(assigns, style: "ml-0")
+    assigns =
+      assign(assigns,
+        style:
+          "box-border inline-flex w-[2.5rem] shrink h-full items-center justify-center m-0 p-0 leading-none relative"
+      )
 
     ~H"""
     <div class={Tails.classes([@style, @class])}>
