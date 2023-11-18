@@ -18,15 +18,67 @@
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import "phoenix_html"
 // Establish Phoenix Socket and LiveView configuration.
-import {Socket} from "phoenix"
-import {LiveSocket} from "phoenix_live_view"
+import { Socket } from "phoenix"
+import { LiveSocket } from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
+
+// Compounds custom JS hooks
+// ==============================================
+let Hooks = {}
+
+Hooks.ComTabs = {
+  mounted() {
+    this.el.addEventListener("switch-tabs", (event) => {
+      const content_prefix = "content-";
+      const tab_prefix = "tab-";
+      const active_key = event.detail.active_key;
+
+      // Do nothing if the clicked tab is disabled
+      const clicked_tab = this.el.querySelector(`[key="${tab_prefix}${active_key}"]`);
+      if (clicked_tab.disabled) {
+        return;
+      }
+
+      // Change the styles of tabs depending on if they're active or non active
+      let tabs = Array.from(this.el.querySelector(".tabs-header").children);
+      tabs.forEach(tab => {
+        if (tab.getAttribute("key") === tab_prefix + active_key) {
+          tab.classList.remove("border-transparent", "text-slate-600");
+          tab.classList.add("text-black");
+        } else {
+          tab.classList.remove("text-black");
+          tab.classList.add("border-transparent", "text-slate-600");
+        }
+      });
+
+      // Hide all other contents and show only the active one
+      let contents = Array.from(this.el.querySelector(".tabs-content").children);
+      contents.forEach(content => {
+
+        if (content.getAttribute("key") === content_prefix + active_key) {
+          content.classList.remove("hidden");
+
+        } else {
+          content.classList.add("hidden");
+        }
+      });
+
+    })
+  }
+}
+// ==============================================
+
+
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+let liveSocket = new LiveSocket("/live", Socket, {
+  hooks: Hooks,
+  params: { _csrf_token: csrfToken }
+})
 
 // Show progress bar on live navigation and form submits
-topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
+topbar.config({ barColors: { 0: "#29d" }, shadowColor: "rgba(0, 0, 0, .3)" })
 window.addEventListener("phx:page-loading-start", _info => topbar.show(300))
 window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
 

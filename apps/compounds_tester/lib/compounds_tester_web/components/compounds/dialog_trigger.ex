@@ -1,6 +1,5 @@
 defmodule Compounds.DialogTrigger do
   use Phoenix.Component
-  alias Phoenix.LiveView.JS
 
   @doc """
     A DialogTrigger is wrapper around a `Diaglog` and a `Trigger`.

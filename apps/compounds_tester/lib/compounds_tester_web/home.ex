@@ -6,11 +6,7 @@ defmodule CompoundsTesterWeb.Home do
   """
 
   use Phoenix.LiveView
-  import Compounds.Card
-  import Compounds.Checkbox
-  import Compounds.ClientButton
-  import Compounds.Dropdown
-  import Compounds.Input
+  import Compounds.Tabs
 
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
@@ -63,36 +59,34 @@ defmodule CompoundsTesterWeb.Home do
         </Compounds.Dropdown.dropdown>
       </div>
 
-      <.card>
-        <.card_header>
-          <.card_title>
-            Card Title
-          </.card_title>
-          <.card_description>
-            Card Description
-          </.card_description>
-        </.card_header>
-        <.card_content>
-          <form class="space-y-4">
-            <div>
-              <label>Could we have your cookies?</label>
-              <input class="border rounded w-full" />
-            </div>
-            <div>
-              <label>Pretty please?</label>
-              <input class="border rounded w-full" />
-            </div>
-          </form>
-        </.card_content>
-        <.card_footer class="flex flex-row w-full justify-between">
-          <button class="rounded-md px-3 py-1 bg-slate-900 text-white font-medium hover:bg-stone-700 transition ease-out duration-200">
-            Accept
-          </button>
-          <button class="rounded-md px-3 py-1 bg-slate-900 text-white font-medium hover:bg-stone-700 transition ease-out duration-200">
-            Decline
-          </button>
-        </.card_footer>
-      </.card>
+      <div class="col-span-2">
+        <.tabs active_key="1">
+          <.tabs_header>
+            <.tab key="1">
+              <Compounds.Icon.icon src="/images/logo.svg" />
+              <p>Tab 1</p>
+            </.tab>
+            <.tab key="2" disabled={true}>
+              Tab 2
+            </.tab>
+            <.tab key="3">
+              Tab 3
+            </.tab>
+          </.tabs_header>
+
+          <.tabs_content>
+            <.content key="1">
+              Tab 1 content
+            </.content>
+            <.content key="2">
+              Tab 2 content
+            </.content>
+            <.content key="3">
+              Tab 3 content
+            </.content>
+          </.tabs_content>
+        </.tabs>
+      </div>
     </div>
     """
   end
