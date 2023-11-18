@@ -30,12 +30,12 @@ let Hooks = {}
 Hooks.ComTabs = {
   mounted() {
     this.el.addEventListener("switch-tabs", (event) => {
-      let content_prefix = "tab-content-";
-      let tab_prefix = "tab-";
-      let active_id = event.detail.active_id;
+      const content_prefix = "content-";
+      const tab_prefix = "tab-";
+      const active_key = event.detail.active_key;
 
       // Do nothing if the clicked tab is disabled
-      let clicked_tab = this.el.querySelector("#" + tab_prefix + active_id);
+      const clicked_tab = this.el.querySelector(`[key="${tab_prefix}${active_key}"]`);
       if (clicked_tab.disabled) {
         return;
       }
@@ -43,7 +43,7 @@ Hooks.ComTabs = {
       // Change the styles of tabs depending on if they're active or non active
       let tabs = Array.from(this.el.querySelector(".tabs-header").children);
       tabs.forEach(tab => {
-        if (tab.id === tab_prefix + active_id) {
+        if (tab.getAttribute("key") === tab_prefix + active_key) {
           tab.classList.remove("border-transparent", "text-slate-600");
           tab.classList.add("text-black");
         } else {
@@ -55,7 +55,8 @@ Hooks.ComTabs = {
       // Hide all other contents and show only the active one
       let contents = Array.from(this.el.querySelector(".tabs-content").children);
       contents.forEach(content => {
-        if (content.id === content_prefix + active_id) {
+
+        if (content.getAttribute("key") === content_prefix + active_key) {
           content.classList.remove("hidden");
 
         } else {

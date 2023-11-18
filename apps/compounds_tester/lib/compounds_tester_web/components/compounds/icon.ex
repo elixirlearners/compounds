@@ -1,5 +1,6 @@
 defmodule Compounds.Icon do
   use Phoenix.Component
+  require Logger
 
   @moduledoc """
    A simple icon component. It could be used to render an SVG OR an image icon.
@@ -40,12 +41,13 @@ defmodule Compounds.Icon do
     assigns = assign(assigns, :inner_block_exists, not Enum.empty?(assigns.inner_block))
 
     if xnor(assigns.src_exists, assigns.inner_block_exists) do
-      raise "You must provide EITHER an SVG element as a child to this component,
-      or a path to the icon's src."
+      Logger.warning("You must provide EITHER an SVG element as a child to this component,
+      or a path to the icon's src.")
     end
 
     ~H"""
     <div class={Tails.classes(["w-6", @class])}>
+      <!-- Default to rendering an image with src if it exist, otherwise render the inner block -->
       <%= if @src_exists do %>
         <image src={@src} />
       <% else %>
