@@ -2,10 +2,12 @@ defmodule Compounds.Input do
   @moduledoc """
     The input component and it's sub-components.
     TODO document the intention of this component.
+    We should make the current `input` component an `input_wrap` component, and create a seperate `input` component
+
+    TODO focus rings
   """
 
   use Phoenix.Component
-  alias Phoenix.LiveView.JS
 
   @doc """
     An input component.
@@ -31,7 +33,7 @@ defmodule Compounds.Input do
     assigns =
       assign(assigns,
         style:
-          "focus:outline-none focus:ring-0 m-1 p-0 shadow-none text-sm bg-transparent border-0 rounded-none width-full min-w-0 appearance-none"
+          "focus:outline-none focus:ring-0 m-1 p-0 shadow-none text-sm bg-transparent border-0 rounded-none width-full min-w-0 appearance-none px-2"
       )
 
     ~H"""

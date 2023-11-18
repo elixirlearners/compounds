@@ -25,48 +25,60 @@ import topbar from "../vendor/topbar"
 
 // Compounds custom JS hooks
 // ==============================================
-let Hooks = {}
+const tab_prefix = "tab-";
+const content_prefix = "content-";
 
+let Hooks = {}
 Hooks.ComTabs = {
   mounted() {
     this.el.addEventListener("switch-tabs", (event) => {
-      const content_prefix = "content-";
-      const tab_prefix = "tab-";
       const active_key = event.detail.active_key;
 
-      // Do nothing if the clicked tab is disabled
-      const clicked_tab = this.el.querySelector(`[key="${tab_prefix}${active_key}"]`);
-      if (clicked_tab.disabled) {
+      // Do nothing if the actived tab is disabled
+      const active_tab = this.el.querySelector(`[key="${tab_prefix}${active_key}"]`);
+      if (active_tab.disabled) {
         return;
       }
 
-      // Change the styles of tabs depending on if they're active or non active
-      let tabs = Array.from(this.el.querySelector(".tabs-header").children);
-      tabs.forEach(tab => {
-        if (tab.getAttribute("key") === tab_prefix + active_key) {
-          tab.classList.remove("border-transparent", "text-slate-600");
-          tab.classList.add("text-black");
-        } else {
-          tab.classList.remove("text-black");
-          tab.classList.add("border-transparent", "text-slate-600");
-        }
-      });
-
       // Hide all other contents and show only the active one
       let contents = Array.from(this.el.querySelector(".tabs-content").children);
-      contents.forEach(content => {
+      showActiveContent(contents, active_key)
 
-        if (content.getAttribute("key") === content_prefix + active_key) {
-          content.classList.remove("hidden");
-
-        } else {
-          content.classList.add("hidden");
-        }
-      });
-
+      // Change the styles of tabs depending on if they're active or non active
+      let tabs = Array.from(this.el.querySelector(".tabs-header").children);
+      styleActiveTab(tabs, active_key)
     })
+
+    // On mount, we want to immediately switch to the active tab.
+    const active_key = this.el.getAttribute("active_key");
+    console.log(active_key)
+    this.el.dispatchEvent(new CustomEvent("switch-tabs", { detail: { active_key } }));
+
   }
 }
+
+function showActiveContent(contents, active_key) {
+  contents.forEach(content => {
+    if (content.getAttribute("key") === content_prefix + active_key) {
+      content.classList.remove("hidden");
+    } else {
+      content.classList.add("hidden");
+    }
+  });
+}
+
+function styleActiveTab(tabs, active_key) {
+  tabs.forEach(tab => {
+    if (tab.getAttribute("key") === tab_prefix + active_key) {
+      tab.classList.remove("border-transparent", "text-slate-600");
+      tab.classList.add("text-black");
+    } else {
+      tab.classList.remove("text-black");
+      tab.classList.add("border-transparent", "text-slate-600");
+    }
+  });
+}
+
 // ==============================================
 
 
