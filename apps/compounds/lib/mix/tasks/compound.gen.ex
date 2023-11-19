@@ -55,7 +55,7 @@ defmodule Mix.Tasks.Compound.Gen do
     generate("toast.ex", function_name: "test")
   end
 
-  defp generate(template_file, assigns) do
+  defp generate(template_file, _assigns) do
     result =
       Path.join(get_templates_dir(), template_file)
       |> File.read!()
