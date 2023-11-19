@@ -1,5 +1,10 @@
+@font-face {
+  font-family: 'Geist var';
+  src: url('/fonts/GeistVariableVF.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
-
-/* This file is for your main application CSS */
