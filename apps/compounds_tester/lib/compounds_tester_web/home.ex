@@ -182,20 +182,19 @@ defmodule CompoundsTesterWeb.Home do
           </Compounds.Card.content>
           <Compounds.Card.footer>
             <div class="w-full flex justify-between">
-              <!--
-              <Compounds.Button.button>
+              <Compounds.Button.button type="secondary">
                 Cancel
               </Compounds.Button.button>
+              <Compounds.Button.button></Compounds.Button.button>
               <Compounds.Button.button>
                 Deploy
               </Compounds.Button.button>
-    -->
             </div>
           </Compounds.Card.footer>
         </Compounds.Card.card>
       </div>
 
-      <div class="w-56">
+      <div class="w-96">
         <Compounds.Tabs.tabs active_key="1">
           <Compounds.Tabs.tabs_header>
             <Compounds.Tabs.tab key="1">
@@ -221,6 +220,38 @@ defmodule CompoundsTesterWeb.Home do
             </Compounds.Tabs.content>
           </Compounds.Tabs.tabs_content>
         </Compounds.Tabs.tabs>
+      </div>
+      <div class="flex flex-end justify-center items-center space-x-4">
+        <Compounds.Button.button type="primary">
+          Primary
+        </Compounds.Button.button>
+        <Compounds.Button.button type="secondary">
+          Secondary
+        </Compounds.Button.button>
+        <Compounds.Button.button type="tertiary">
+          Tertiary
+        </Compounds.Button.button>
+        <Compounds.Button.button type="error">
+          Error
+        </Compounds.Button.button>
+        <Compounds.Button.button type="warning">
+          Warning
+        </Compounds.Button.button>
+        <Compounds.Button.button disabled>
+          Disabled
+        </Compounds.Button.button>
+        <Compounds.Button.button disabled>
+          <div class="flex flex-row justify-evenly items-center">
+            <Compounds.Spinner.spinner class="w-7 h-7" />
+            <p>Loading</p>
+          </div>
+        </Compounds.Button.button>
+        <Compounds.Button.button type="secondary" class="p-3">
+          <CoreComponents.icon name="hero-archive-box" />
+        </Compounds.Button.button>
+        <Compounds.Button.button type="secondary" class="p-3">
+          <CoreComponents.icon name="hero-adjustments-horizontal" />
+        </Compounds.Button.button>
       </div>
 
       <div class="grid grid-cols-3 grid-rows-2 gap-4">
