@@ -6,7 +6,6 @@ defmodule CompoundsTesterWeb.Home do
   """
 
   use Phoenix.LiveView
-  import Compounds.Tabs
 
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
@@ -14,8 +13,8 @@ defmodule CompoundsTesterWeb.Home do
 
   def render(assigns) do
     ~H"""
-    <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full gap-10">
-      <div class="col-span-6">
+    <div class="p-16 h-full w-full flex flex-col items-center space-y-16">
+      <div class="w-56">
         <Compounds.Dropdown.dropdown id="my-dropdown">
           <:trigger>
             Open
@@ -59,33 +58,67 @@ defmodule CompoundsTesterWeb.Home do
         </Compounds.Dropdown.dropdown>
       </div>
 
-      <div class="col-span-2">
-        <.tabs active_key="1">
-          <.tabs_header>
-            <.tab key="1">
+      <div>
+        <Compounds.Card.card>
+          <Compounds.Card.header>
+            <Compounds.Card.title>
+              Create Project
+            </Compounds.Card.title>
+            <Compounds.Card.description>
+              Deploy your new project in one-click.
+            </Compounds.Card.description>
+          </Compounds.Card.header>
+          <Compounds.Card.content class="flex flex-col space-y-4">
+            <Compounds.Input.input class="w-full" placeholder="Your project's name">
+              <:label_left>
+                Name
+              </:label_left>
+            </Compounds.Input.input>
+            <Compounds.Input.input placeholder="Your project's framework">
+              <:label_right>
+                Framework
+              </:label_right>
+            </Compounds.Input.input>
+          </Compounds.Card.content>
+          <Compounds.Card.footer>
+            <div class="w-full flex justify-between">
+              <button class="bg-white border border-neutral-200 rounded-md px-3 py-2 hover:bg-neutral-200 transition ease-out duration-200 font-medium">
+                Cancel
+              </button>
+              <button class="bg-black rounded-md px-3 py-2 hover:bg-neutral-700 transition ease-out duration-200 text-white font-medium">
+                Deploy
+              </button>
+            </div>
+          </Compounds.Card.footer>
+        </Compounds.Card.card>
+      </div>
+
+      <div class="w-56">
+        <Compounds.Tabs.tabs active_key="1">
+          <Compounds.Tabs.tabs_header>
+            <Compounds.Tabs.tab key="1">
               <Compounds.Icon.icon src="/images/logo.svg" />
               <p>Tab 1</p>
-            </.tab>
-            <.tab key="2" disabled={true}>
+            </Compounds.Tabs.tab>
+            <Compounds.Tabs.tab key="2" disabled={true}>
               Tab 2
-            </.tab>
-            <.tab key="3">
+            </Compounds.Tabs.tab>
+            <Compounds.Tabs.tab key="3">
               Tab 3
-            </.tab>
-          </.tabs_header>
-
-          <.tabs_content>
-            <.content key="1">
+            </Compounds.Tabs.tab>
+          </Compounds.Tabs.tabs_header>
+          <Compounds.Tabs.tabs_content>
+            <Compounds.Tabs.content key="1">
               Tab 1 content
-            </.content>
-            <.content key="2">
+            </Compounds.Tabs.content>
+            <Compounds.Tabs.content key="2">
               Tab 2 content
-            </.content>
-            <.content key="3">
+            </Compounds.Tabs.content>
+            <Compounds.Tabs.content key="3">
               Tab 3 content
-            </.content>
-          </.tabs_content>
-        </.tabs>
+            </Compounds.Tabs.content>
+          </Compounds.Tabs.tabs_content>
+        </Compounds.Tabs.tabs>
       </div>
     </div>
     """

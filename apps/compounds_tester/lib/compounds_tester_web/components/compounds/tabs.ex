@@ -4,37 +4,6 @@ defmodule Compounds.Tabs do
 
   @moduledoc """
     Tabs organize content into multiple sections and allow users to navigate between them.
-
-    Examples:
-    ```
-      <.tabs active_key="1">
-        <.tabs_header>
-          <.tab key="1">
-            <Compounds.Icon.icon src="/images/logo.svg"/>
-            <p>Tab 1</p>
-          </.tab>
-          <.tab key="2" disabled={true}>
-            Tab 2
-          </.tab>
-          <.tab key="3">
-            Tab 3
-          </.tab>
-        </.tabs_header>
-
-        <.tabs_content>
-          <.content key="1">
-            Tab 1 content
-          </.content>
-          <.content key="2">
-            Tab 2 content
-          </.content>
-          <.content key="3">
-            Tab 3 content
-          </.content>
-        </.tabs_content>
-      </.tabs>
-    ```
-
   """
 
   # 1.0 Todos
@@ -43,7 +12,7 @@ defmodule Compounds.Tabs do
 
   slot :inner_block
   attr :class, :string, default: nil
-  attr :active_key, :string, default: nil
+  attr :active_key, :string, default: "1"
   # When using phx-hook, a unique DOM ID must always be set.
   attr :id, :string, default: Compounds.Id.generate("tabs")
   attr :rest, :global
@@ -52,10 +21,10 @@ defmodule Compounds.Tabs do
     ~H"""
     <div
       id={@id}
+      active_key={@active_key}
       {@rest}
       class={Tails.classes(["w-full h-36", @class])}
       phx-hook="ComTabs"
-      phx-mounted={JS.dispatch("switch-tabs", detail: %{active_key: @active_key})}
     >
       <%= render_slot(@inner_block) %>
     </div>
