@@ -16,101 +16,79 @@ defmodule CompoundsTesterWeb.Home do
   def render(assigns) do
     ~H"""
     <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full gap-10">
-      <div class="col-span-6">
-        <Input.input>
+      <div class="grid grid-cols-3 col-span-6 gap-2">
+        <Compounds.Input.input>
           <:input_block_label>
             I'm a block label!
           </:input_block_label>
-        </Input.input>
-      </div>
-      <div class="col-span-6">
-        <Input.input clearable?={true}>
+        </Compounds.Input.input>
+        <Compounds.Input.input clearable?={true}>
           <:input_block_label>
             I'm clearable
           </:input_block_label>
-        </Input.input>
-      </div>
-      <div class="col-span-6">
-        <Input.input>
+        </Compounds.Input.input>
+        <Compounds.Input.input>
           <:label_right>
             Label Right
           </:label_right>
-        </Input.input>
-      </div>
-      <div class="col-span-6">
-        <Input.input>
+        </Compounds.Input.input>
+        <Compounds.Input.input>
           <:label_left>
             Label Left
           </:label_left>
-        </Input.input>
-      </div>
-      <div class="col-span-6">
-        <Input.input>
+        </Compounds.Input.input>
+        <Compounds.Input.input>
           <:label_left>
             Label Left
           </:label_left>
           <:label_right>
             Label Right
           </:label_right>
-        </Input.input>
-      </div>
-      <div class="col-span-6">
-        <Input.input disabled?={true}>
+        </Compounds.Input.input>
+        <Compounds.Input.input disabled?={true}>
           <:label_left>
             I'm Disabled
           </:label_left>
-        </Input.input>
-      </div>
-      <div class="col-span-6">
-        <Input.input read_only?={true} placeholder="Cant edit me!">
+        </Compounds.Input.input>
+        <Compounds.Input.input read_only?={true} placeholder="Cant edit me!">
           <:label_left>
             I'm read only
           </:label_left>
-        </Input.input>
-      </div>
-      <div class="col-span-6">
-        <Input.input placeholder="Icon left">
+        </Compounds.Input.input>
+        <Compounds.Input.input placeholder="Icon left">
           <:icon_left>
             <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
           </:icon_left>
-        </Input.input>
-      </div>
-      <div class="col-span-6">
-        <Input.input placeholder="Icon right">
+        </Compounds.Input.input>
+        <Compounds.Input.input placeholder="Icon right">
           <:icon_right>
             <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
           </:icon_right>
-        </Input.input>
-      </div>
-      <div class="col-span-6">
-        <Input.input placeholder="Icon right">
+        </Compounds.Input.input>
+        <Compounds.Input.input placeholder="Icon right">
           <:icon_right>
             <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
           </:icon_right>
           <:label_left>
             Label left
           </:label_left>
-        </Input.input>
-      </div>
-      <div class="col-span-6">
-        <Input.input placeholder="Icon right">
+        </Compounds.Input.input>
+        <Compounds.Input.input placeholder="Icon right">
           <:icon_right>
             <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
           </:icon_right>
           <:label_right>
             Label right
           </:label_right>
-        </Input.input>
-      </div>
-      <div class="col-span-6">
-        <Input.input placeholder="Icon left">
+        </Compounds.Input.input>
+        <Compounds.Input.input placeholder="Icon left">
           <:icon_left>
             <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
           </:icon_left>
           <:label_left>
             Label left
           </:label_left>
-        </Input.input>
+        </Compounds.Input.input>
       </div>
       <div class="col-span-6">
         <Compounds.Dropdown.dropdown id="my-dropdown">
@@ -180,12 +158,14 @@ defmodule CompoundsTesterWeb.Home do
           </Compounds.Card.content>
           <Compounds.Card.footer>
             <div class="w-full flex justify-between">
+              <!--
               <Compounds.Button.button>
                 Cancel
               </Compounds.Button.button>
               <Compounds.Button.button>
                 Deploy
               </Compounds.Button.button>
+    -->
             </div>
           </Compounds.Card.footer>
         </Compounds.Card.card>
