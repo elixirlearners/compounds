@@ -1,13 +1,12 @@
 defmodule Compounds.Checkbox do
   use Phoenix.Component
-  alias Phoenix.LiveView.JS
 
   @doc """
     A simple checkbox component.
 
     # Attributes:
     * `checked` - A boolean that determines whether the checkbox is checked or not.
-    * `custom_style` - A TailwindCSS class string, this will be merged with the default class string.
+    * `class` - A TailwindCSS class string, this will be merged with the default class string.
 
     # Example:
     ```
@@ -17,13 +16,15 @@ defmodule Compounds.Checkbox do
   """
 
   attr :checked, :boolean, default: false
-  attr :custom_style, :string, default: nil
+  attr :class, :string, default: nil
 
   def checkbox(assigns) do
-    assigns = assign(assigns, style: "rounded border border-slate-300")
-
     ~H"""
-    <input class={Tails.classes([@style, @custom_style])} type="checkbox" checked={@checked} />
+    <input
+      class={Tails.classes(["rounded border border-slate-300", @custom_style])}
+      type="checkbox"
+      checked={@checked}
+    />
     """
   end
 end

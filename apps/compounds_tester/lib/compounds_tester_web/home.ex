@@ -1,11 +1,13 @@
 defmodule CompoundsTesterWeb.Home do
-  use CompoundsTesterWeb, :live_view
+  use Phoenix.LiveView
+
+  use Phoenix.VerifiedRoutes,
+    router: CompoundsTesterWeb.Router,
+    endpoint: CompoundsTesterWeb.Endpoint
 
   @moduledoc """
   The main page of the application, used to display all components in one showcase.
   """
-
-  use Phoenix.LiveView
 
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
@@ -82,12 +84,12 @@ defmodule CompoundsTesterWeb.Home do
           </Compounds.Card.content>
           <Compounds.Card.footer>
             <div class="w-full flex justify-between">
-              <button class="bg-white border border-neutral-200 rounded-md px-3 py-2 hover:bg-neutral-200 transition ease-out duration-200 font-medium">
+              <Compounds.Button.button>
                 Cancel
-              </button>
-              <button class="bg-black rounded-md px-3 py-2 hover:bg-neutral-700 transition ease-out duration-200 text-white font-medium">
+              </Compounds.Button.button>
+              <Compounds.Button.button>
                 Deploy
-              </button>
+              </Compounds.Button.button>
             </div>
           </Compounds.Card.footer>
         </Compounds.Card.card>
