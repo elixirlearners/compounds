@@ -1,5 +1,6 @@
 // Example markdownlint configuration with all properties set to their default value
 {
+  "ignore": ["apps/compounds_tester/assets"],
 
   // Default state for all rules
   "default": true,
@@ -215,13 +216,7 @@
   "MD042": true,
 
   // MD043/required-headings : Required heading structure : https://github.com/DavidAnson/markdownlint/blob/v0.32.0/doc/md043.md
-  "MD043": {
-    // List of headings
-    "headings": [],
-    // Match case of headings
-    "match_case": false
-  },
-
+  "MD043": false,
   // MD044/proper-names : Proper names should have the correct capitalization : https://github.com/DavidAnson/markdownlint/blob/v0.32.0/doc/md044.md
   "MD044": {
     // List of proper names

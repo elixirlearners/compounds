@@ -1,16 +1,13 @@
 defmodule CompoundsTesterWeb.Home do
-  use CompoundsTesterWeb, :live_view
+  use Phoenix.LiveView
+
+  use Phoenix.VerifiedRoutes,
+    router: CompoundsTesterWeb.Router,
+    endpoint: CompoundsTesterWeb.Endpoint
 
   @moduledoc """
   The main page of the application, used to display all components in one showcase.
   """
-
-  use Phoenix.LiveView
-  import Compounds.Card
-  import Compounds.Checkbox
-  import Compounds.ClientButton
-  import Compounds.Dropdown
-  alias Compounds.Input
 
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
@@ -159,36 +156,89 @@ defmodule CompoundsTesterWeb.Home do
         </Compounds.Dropdown.dropdown>
       </div>
 
-      <.card>
-        <.card_header>
-          <.card_title>
-            Card Title
-          </.card_title>
-          <.card_description>
-            Card Description
-          </.card_description>
-        </.card_header>
-        <.card_content>
-          <form class="space-y-4">
-            <div>
-              <label>Could we have your cookies?</label>
-              <input class="border rounded w-full" />
+      <div>
+        <Compounds.Card.card>
+          <Compounds.Card.header>
+            <Compounds.Card.title>
+              Create Project
+            </Compounds.Card.title>
+            <Compounds.Card.description>
+              Deploy your new project in one-click.
+            </Compounds.Card.description>
+          </Compounds.Card.header>
+          <Compounds.Card.content class="flex flex-col space-y-4">
+            <Compounds.Input.input class="w-full" placeholder="Your project's name">
+              <:label_left>
+                Name
+              </:label_left>
+            </Compounds.Input.input>
+            <Compounds.Input.input placeholder="Your project's framework">
+              <:label_right>
+                Framework
+              </:label_right>
+            </Compounds.Input.input>
+          </Compounds.Card.content>
+          <Compounds.Card.footer>
+            <div class="w-full flex justify-between">
+              <Compounds.Button.button>
+                Cancel
+              </Compounds.Button.button>
+              <Compounds.Button.button>
+                Deploy
+              </Compounds.Button.button>
             </div>
-            <div>
-              <label>Pretty please?</label>
-              <input class="border rounded w-full" />
-            </div>
-          </form>
-        </.card_content>
-        <.card_footer class="flex flex-row w-full justify-between">
-          <button class="rounded-md px-3 py-1 bg-slate-900 text-white font-medium hover:bg-stone-700 transition ease-out duration-200">
-            Accept
-          </button>
-          <button class="rounded-md px-3 py-1 bg-slate-900 text-white font-medium hover:bg-stone-700 transition ease-out duration-200">
-            Decline
-          </button>
-        </.card_footer>
-      </.card>
+          </Compounds.Card.footer>
+        </Compounds.Card.card>
+      </div>
+
+      <div class="w-56">
+        <Compounds.Tabs.tabs active_key="1">
+          <Compounds.Tabs.tabs_header>
+            <Compounds.Tabs.tab key="1">
+              <Compounds.Icon.icon src="/images/logo.svg" />
+              <p>Tab 1</p>
+            </Compounds.Tabs.tab>
+            <Compounds.Tabs.tab key="2" disabled={true}>
+              Tab 2
+            </Compounds.Tabs.tab>
+            <Compounds.Tabs.tab key="3">
+              Tab 3
+            </Compounds.Tabs.tab>
+          </Compounds.Tabs.tabs_header>
+          <Compounds.Tabs.tabs_content>
+            <Compounds.Tabs.content key="1">
+              Tab 1 content
+            </Compounds.Tabs.content>
+            <Compounds.Tabs.content key="2">
+              Tab 2 content
+            </Compounds.Tabs.content>
+            <Compounds.Tabs.content key="3">
+              Tab 3 content
+            </Compounds.Tabs.content>
+          </Compounds.Tabs.tabs_content>
+        </Compounds.Tabs.tabs>
+      </div>
+
+      <div class="grid grid-cols-3 grid-rows-2 gap-4">
+        <Compounds.Spinner.spinner />
+        <Compounds.Spinner.spinner color="#0a0a0a" opacity_start="0.8" opacity_end="0" />
+        <Compounds.Spinner.spinner blade_width="8%" blade_height="20%" />
+        <Compounds.Spinner.spinner blade_round="0px" blade_width="5%" blade_height="20%" />
+        <Compounds.Spinner.spinner
+          blade_round="20px"
+          blade_width="8%"
+          blade_height="30%"
+          opacity_start="1"
+          opacity_end="0"
+        />
+        <Compounds.Spinner.spinner
+          blade_round="10px"
+          blade_width="5%"
+          blade_height="25%"
+          opacity_start="1"
+          opacity_end="0"
+        />
+      </div>
     </div>
     """
   end

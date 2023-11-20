@@ -8,7 +8,6 @@ defmodule Compounds.Input do
   """
 
   use Phoenix.Component
-  alias Phoenix.LiveView.JS
 
   @doc """
     An input component.

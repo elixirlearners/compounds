@@ -4,7 +4,6 @@ defmodule Compounds.Toast do
   """
 
   use Phoenix.Component
-  alias Phoenix.LiveView.JS
 
   def toast(assigns) do
     ~H"""
