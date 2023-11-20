@@ -1,7 +1,10 @@
 defmodule Compounds.Input do
   @moduledoc """
     The input component and it's sub-components.
-    TODO document the intention of this component.
+    ## TODO
+    * Clearable
+    * Password
+    * Input capture
   """
 
   use Phoenix.Component
@@ -11,13 +14,23 @@ defmodule Compounds.Input do
     An input component.
 
     # Attributes:
-    * `custom_style` - User defined TailwindCSS classes. This will be merge with the default class string.
-
     # Slots:
     * `label_right` - Label to be placed to the right of the input.
     * `label_left` - Label to be placed to the left of the input.
     * `icon_right` - Icon to be placed to the right of the input.
     * `icon_left` - Icon to be placed to the left of the input.
+    * `input_block_label` -
+    * `outer_wrapper` -
+    * `inner_wrapper` -
+    * `input_wrapper` -
+
+    # Attributes
+    * `class` -
+    * `type` -
+    * `placeholder` -
+    * `disabled?` -
+    * `read_only?` -
+    * `clearable?` -
   """
   slot :label_right
   slot :label_left
@@ -43,8 +56,9 @@ defmodule Compounds.Input do
   attr :class, :string, default: nil
   attr :type, :string, default: "text"
   attr :placeholder, :string, default: "Placeholder"
-  attr :disabled, :boolean, default: false
-  attr :read_only, :boolean, default: false
+  attr :disabled?, :boolean, default: false
+  attr :read_only?, :boolean, default: false
+  attr :clearable?, :boolean, default: false
 
   def input(assigns) do
     assigns =
@@ -86,7 +100,7 @@ defmodule Compounds.Input do
                 else
                   ""
                 end <>
-                if @disabled do
+                if @disabled? do
                   "bg-accent_1 border-accent_2"
                 else
                   ""
@@ -100,8 +114,8 @@ defmodule Compounds.Input do
             </.icon_left>
           <% end %>
           <input
-            disabled={@disabled}
-            readOnly={@read_only}
+            disabled={@disabled?}
+            readOnly={@read_only?}
             phx-blur={
               JS.transition({"ease duration-200", "border-black", "border-accent_2"},
                 to: "#" <> Keyword.get(@input_wrapper, :id, @id)
@@ -115,7 +129,7 @@ defmodule Compounds.Input do
             class={
               Tails.classes([
                 @style <>
-                  if @disabled do
+                  if @disabled? do
                     " cursor-not-allowed "
                   else
                     ""
@@ -126,6 +140,9 @@ defmodule Compounds.Input do
             type={@type}
             placeholder={@placeholder}
           />
+          <%= if @clearable? do %>
+            <.clearable />
+          <% end %>
           <%= if length(@icon_right) > 0 do %>
             <.icon_right>
               <%= render_slot(@icon_right) %>
@@ -214,26 +231,6 @@ defmodule Compounds.Input do
     """
   end
 
-  # .input-icon {
-  #   box-sizing: border-box;
-  #   display: inline-flex;
-  #   width: calc(var(--input-height) - 2px);
-  #   flex-shrink: 0;
-  #   height: 100%;
-  #   align-items: center;
-  #   justify-content: center;
-  #   margin: 0;
-  #   padding: 0;
-  #   line-height: 1;
-  #   position: relative;
-  #   cursor: ${clickable ? 'pointer' : 'default'};
-  #   pointer-events: ${clickable ? 'auto' : 'none'};
-  # }
-  # .input-icon :global(svg) {
-  #   width: calc(var(--input-height) - 2px);
-  #   height: calc(var(--input-height) - 2px);
-  #   transform: scale(0.44);
-  # }
   slot :inner_block
   attr :class, :string, default: nil
 
@@ -263,6 +260,35 @@ defmodule Compounds.Input do
 
     ~H"""
     <div class={Tails.classes([@style, @class])}>
+      <%= render_slot(@inner_block) %>
+    </div>
+    """
+  end
+
+  slot :inner_block
+  attr :class, :string, default: nil
+
+  def clearable(assigns) do
+    assigns =
+      assign(assigns,
+        style:
+          "box-border inline-flex w-[1.25rem] shrink h-full items-center justify-center m-0 p-0 leading-none relative color-accent_3"
+      )
+
+    ~H"""
+    <div id="clear-svg" class={Tails.classes([@style, @class])}>
+      <svg
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+        shapeRendering="geometricPrecision"
+      >
+        <path d="M18 6L6 18" />
+        <path d="M6 6l12 12" />
+      </svg>
       <%= render_slot(@inner_block) %>
     </div>
     """

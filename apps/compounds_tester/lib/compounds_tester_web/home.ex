@@ -27,6 +27,13 @@ defmodule CompoundsTesterWeb.Home do
         </Input.input>
       </div>
       <div class="col-span-6">
+        <Input.input clearable?={true}>
+          <:input_block_label>
+            I'm clearable
+          </:input_block_label>
+        </Input.input>
+      </div>
+      <div class="col-span-6">
         <Input.input>
           <:label_right>
             Label Right
@@ -51,14 +58,14 @@ defmodule CompoundsTesterWeb.Home do
         </Input.input>
       </div>
       <div class="col-span-6">
-        <Input.input disabled={true}>
+        <Input.input disabled?={true}>
           <:label_left>
             I'm Disabled
           </:label_left>
         </Input.input>
       </div>
       <div class="col-span-6">
-        <Input.input read_only={true} placeholder="Cant edit me!">
+        <Input.input read_only?={true} placeholder="Cant edit me!">
           <:label_left>
             I'm read only
           </:label_left>
