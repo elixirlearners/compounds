@@ -51,9 +51,7 @@ Hooks.ComTabs = {
 
     // On mount, we want to immediately switch to the active tab.
     const active_key = this.el.getAttribute("active_key");
-    console.log(active_key)
     this.el.dispatchEvent(new CustomEvent("switch-tabs", { detail: { active_key } }));
-
   }
 }
 
@@ -78,6 +76,62 @@ function styleActiveTab(tabs, active_key) {
     }
   });
 }
+
+
+Hooks.ComCombo = {
+  mounted() {
+    this.el.addEventListener("click", (event) => {
+      const dropdown_icon = this.el.querySelector(".dropdown-icon");
+      const dropdown_menu = this.el.querySelector(".dropdown-menu");
+      // An element in the dropdown menu was clicked
+      if (event.target.parentNode.classList.contains("dropdown-menu")) {
+        handleDropdownClick(event);
+      }
+      // An element in the input wrapper was clicked
+      else {
+        handleInputClick(dropdown_icon, dropdown_menu, event);
+      }
+    })
+  }
+}
+
+function handleDropdownClick(event) {
+  console.log("dropdown clicked")
+}
+
+function handleInputClick(dropdown_icon, dropdown_menu, event) {
+  console.log("input clicked")
+  const target = event.target
+  // if the input is clicked we want to:
+  // 1. show the dropdown
+  // 2. rotate the icon to the up position
+
+  // if the dropdown_icon is clicked we want to:
+  // 1. toggle the dropdown
+  // 2. toggle the icon rotation between up and down
+  if (target.parentNode.classList.contains("dropdown-icon")) {
+    // Toggle the dropdown and the icon rotation
+    if (dropdown_icon.style.transform !== "rotate(180deg)") {
+      dropdown_icon.style.transform = "rotate(180deg)";
+      dropdown_menu.classList.remove("hidden");
+      dropdown_menu.classList.add("flex");
+    }
+    else {
+      dropdown_icon.style.transform = "";
+      dropdown_menu.classList.remove("flex");
+      dropdown_menu.classList.add("hidden");
+    }
+  }
+  else {
+    // Show the dropdown and rotate the icon to the down position
+    if (dropdown_icon.style.transform !== "rotate(180deg)") {
+      dropdown_icon.style.transform = "rotate(180deg)";
+      dropdown_menu.classList.remove("hidden");
+      dropdown_menu.classList.add("flex");
+    }
+  }
+}
+
 
 // ==============================================
 

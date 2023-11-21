@@ -84,12 +84,12 @@ defmodule CompoundsTesterWeb.Home do
           </Compounds.Card.content>
           <Compounds.Card.footer>
             <div class="w-full flex justify-between">
-              <Compounds.Button.button>
+              <!--Compounds.Button.button>
                 Cancel
               </Compounds.Button.button>
               <Compounds.Button.button>
                 Deploy
-              </Compounds.Button.button>
+              </Compounds.Button.button-->
             </div>
           </Compounds.Card.footer>
         </Compounds.Card.card>
@@ -121,6 +121,24 @@ defmodule CompoundsTesterWeb.Home do
             </Compounds.Tabs.content>
           </Compounds.Tabs.tabs_content>
         </Compounds.Tabs.tabs>
+      </div>
+
+      <div class="w-[50rem]">
+        <Compounds.ComboBox.combo_box options={["React", "Next.JS", "Remix", "Phoenix"]}>
+          <Compounds.ComboBox.input_wrapper>
+            <CompoundsTesterWeb.CoreComponents.icon
+              name="hero-magnifying-glass"
+              class="h-5 w-5 bg-neutral-600"
+            />
+            <Compounds.ComboBox.input />
+            <Compounds.ComboBox.dropdown_icon>
+              <CompoundsTesterWeb.CoreComponents.icon
+                name="hero-chevron-down"
+                class="h-5 w-5 bg-neutral-600 cursor-pointer"
+              />
+            </Compounds.ComboBox.dropdown_icon>
+          </Compounds.ComboBox.input_wrapper>
+        </Compounds.ComboBox.combo_box>
       </div>
     </div>
     """

@@ -9,6 +9,7 @@ defmodule Compounds.Dropdown do
   slot(:inner_block, doc: "The content of the dropdown", required: true)
   slot(:trigger, doc: "The element to trigger the dropdown menu", required: true)
 
+  @spec dropdown(map()) :: Phoenix.LiveView.Rendered.t()
   @doc """
   Renders a drop down menu
 
