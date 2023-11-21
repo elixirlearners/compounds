@@ -16,7 +16,20 @@ defmodule CompoundsTesterWeb.Home do
   def render(assigns) do
     ~H"""
     <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full gap-10">
-      <div class="grid grid-cols-3 col-span-6 gap-2">
+      <div class="grid grid-cols-2 col-span-6 gap-4">
+        <Compounds.Accordion.accordion title="The Accordion">
+          <:contents>
+            Contents go here
+          </:contents>
+        </Compounds.Accordion.accordion>
+        <Compounds.Accordion.accordion title="The Accordion">
+          <:subtitle>I'm a subtitle</:subtitle>
+          <:contents>
+            Contents go here
+          </:contents>
+        </Compounds.Accordion.accordion>
+      </div>
+      <div class="grid grid-cols-3 col-span-6 gap-4">
         <Compounds.Input.input>
           <:input_block_label>
             I'm a block label!

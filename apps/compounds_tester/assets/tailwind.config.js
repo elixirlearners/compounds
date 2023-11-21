@@ -13,12 +13,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      transitionProperty: {
+        'height': 'height'
+      },
       spacing: {
         gap: "16pt",
         gap_half: "8pt"
       },
       colors: {
         background: "#FFF",
+        border: "#EAEAEA",
         accent_1: "#FAFAFA",
         accent_2: "#EAEAEA",
         accent_3: "#999",
