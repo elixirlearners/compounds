@@ -1,9 +1,10 @@
 defmodule Compounds.ComboBox do
   use Phoenix.Component
-  # TODO: On select, update the input field with the selected value
-  # TODO: style dropdown menu
-  # TODO: toggle the dropdown on click away
-  # TODO: toggle the dropdown on escape key
+  # TODO: fix hover and keyboard navigation both selecting elements
+  # TODO: enter on dropdown not open no op
+  # TODO: fix clicking on dropdown icon not focusing input
+  # TODO: close the dropdown on click away
+  # TODO: close the dropdown on escape key
   # TODO: focus input when dropdown icon is clicked
   # TODO: clear button
   # TODO: final visual cleanup
@@ -17,7 +18,6 @@ defmodule Compounds.ComboBox do
 
   @spec combo_box(map()) :: Phoenix.LiveView.Rendered.t()
   def combo_box(assigns) do
-    # Todo,make the user defined class style the root element instead of the input wrapper
     ~H"""
     <div
       class={
@@ -33,17 +33,20 @@ defmodule Compounds.ComboBox do
       <!-- Input wrapper -->
       <%= render_slot(@inner_block) %>
       <!-- Dropdown Menu -->
-      <.focus_wrap
+      <ul
         id={Compounds.Id.generate("dropdown-menu")}
         class="dropdown-menu flex-col items-center justify-center hidden w-full
         rounded-md px-2 py-3 border border-neutral-400"
       >
         <%= for option <- @options do %>
-          <div class="w-full px-3 py-2 rounded-md text-left hover:bg-neutral-300 cursor-pointer">
+          <li
+            aria-selected="false"
+            class="aria-selected:bg-neutral-200 w-full px-3 py-2 rounded-md text-left hover:bg-neutral-200 cursor-pointer"
+          >
             <%= option %>
-          </div>
+          </li>
         <% end %>
-      </.focus_wrap>
+      </ul>
     </div>
     """
   end
@@ -73,8 +76,9 @@ defmodule Compounds.ComboBox do
 
   def input(assigns) do
     ~H"""
+    <!-- The compounds-input class is used by the ComCombo hook to fill in inputs -->
     <input
-      class={Tails.classes(["flex-1 px-2 outline-none  placeholder-neutral-400"])}
+      class={Tails.classes(["compounds-input flex-1 px-2 outline-none  placeholder-neutral-400"])}
       placeholder={@placeholder}
       {@rest}
     />

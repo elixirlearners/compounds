@@ -24,6 +24,9 @@ import topbar from "../vendor/topbar"
 
 
 // Compounds custom JS hooks
+// TODO variables should be camelCase, not snake_case. When in rome...
+// TODO document all functions
+// TODO, hovering over a li should mark it as aria-selected
 // ==============================================
 const tab_prefix = "tab-";
 const content_prefix = "content-";
@@ -80,6 +83,7 @@ function styleActiveTab(tabs, active_key) {
 
 Hooks.ComCombo = {
   mounted() {
+    // Click events for the combo box
     this.el.addEventListener("click", (event) => {
       const dropdown_icon = this.el.querySelector(".dropdown-icon");
       const dropdown_menu = this.el.querySelector(".dropdown-menu");
@@ -92,44 +96,133 @@ Hooks.ComCombo = {
         handleInputClick(dropdown_icon, dropdown_menu, event);
       }
     })
+    this.el.querySelector(".compounds-input").addEventListener("focusout", (event) => {
+      const dropdown_icon = this.el.querySelector(".dropdown-icon");
+      const dropdown_menu = this.el.querySelector(".dropdown-menu");
+      closeDropdown(dropdown_icon, dropdown_menu);
+    })
+
+    // Keyboard events for the combo box
+    this.el.addEventListener("keydown", (event) => {
+      const combo_box = this.el;
+      const dropdown_menu = combo_box.querySelector(".dropdown-menu");
+      const input = combo_box.querySelector(".compounds-input");
+      const dropdown_icon = combo_box.querySelector(".dropdown-icon");
+
+      // Query for the selected list item
+      let selected_li = combo_box.querySelector("li[aria-selected='true']");
+
+      // If there is no selected list item, select the first one
+      if (!selected_li) {
+        selected_li = combo_box.querySelector("li");
+        selected_li.setAttribute("aria-selected", "true");
+      }
+
+      switch (event.key) {
+        case 'ArrowDown':
+          selected_li.setAttribute("aria-selected", "false");
+          getNextSelection(selected_li).setAttribute("aria-selected", "true");
+          break;
+        case 'ArrowUp':
+          selected_li.setAttribute("aria-selected", "false");
+          getPreviousSelection(selected_li).setAttribute("aria-selected", "true");
+          break;
+        case 'Enter':
+          acceptSelected(input, dropdown_menu);
+          break;
+      }
+    })
+
+    // Hover events for each list item
+    const listItems = this.el.querySelectorAll('.dropdown-menu li');
+    listItems.forEach(item => {
+      item.addEventListener('mouseover', () => {
+        // Reset aria-selected for all items
+        listItems.forEach(li => li.setAttribute('aria-selected', 'false'));
+        // Set aria-selected true for the hovered item
+        item.setAttribute('aria-selected', 'true');
+      });
+    });
   }
+}
+
+function getNextSelection(element) {
+  // Get the next selection in the dropdown menu
+  if (element.nextElementSibling) {
+    return element.nextElementSibling;
+  }
+  else {
+    return element.parentNode.firstElementChild;
+  }
+}
+
+function getPreviousSelection(element) {
+  // Get the previous selection in the dropdown menu
+  if (element.previousElementSibling) {
+    return element.previousElementSibling;
+  }
+  else {
+    return element.parentNode.lastElementChild;
+  }
+}
+
+
+function toggleDropdown(dropdown_icon, dropdown_menu) {
+  // Toggle the dropdown and the icon rotation
+  if (dropdown_menu.classList.contains("hidden")) {
+    openDropdown(dropdown_icon, dropdown_menu)
+  }
+  else {
+    closeDropdown(dropdown_icon, dropdown_menu)
+  }
+}
+
+function openDropdown(dropdown_icon, dropdown_menu) {
+  // Show the dropdown and rotate the icon to the down position
+  dropdown_icon.style.transform = "rotate(180deg)";
+  dropdown_menu.classList.remove("hidden");
+  dropdown_menu.classList.add("flex");
+
+  // Focus on the dropdown menu's elements
+  // If there are no selected elements in the dropdown, select the first one
+  const selected_li = dropdown_menu.querySelector("li[aria-selected='true']");
+  if (!selected_li) {
+    dropdown_menu.querySelector("li").setAttribute("aria-selected", "true");
+  }
+}
+
+function closeDropdown(dropdown_icon, dropdown_menu) {
+  // Hide the dropdown and rotate the icon to the down position
+  dropdown_icon.style.transform = "";
+  dropdown_menu.classList.remove("flex");
+  dropdown_menu.classList.add("hidden");
 }
 
 function handleDropdownClick(event) {
-  console.log("dropdown clicked")
+  const dropdown_menu = event.target.parentNode;
+  const input = dropdown_menu.parentNode.querySelector(".compounds-input");
+  acceptSelected(input, dropdown_menu);
 }
 
-function handleInputClick(dropdown_icon, dropdown_menu, event) {
-  console.log("input clicked")
-  const target = event.target
-  // if the input is clicked we want to:
-  // 1. show the dropdown
-  // 2. rotate the icon to the up position
 
-  // if the dropdown_icon is clicked we want to:
-  // 1. toggle the dropdown
-  // 2. toggle the icon rotation between up and down
-  if (target.parentNode.classList.contains("dropdown-icon")) {
-    // Toggle the dropdown and the icon rotation
-    if (dropdown_icon.style.transform !== "rotate(180deg)") {
-      dropdown_icon.style.transform = "rotate(180deg)";
-      dropdown_menu.classList.remove("hidden");
-      dropdown_menu.classList.add("flex");
-    }
-    else {
-      dropdown_icon.style.transform = "";
-      dropdown_menu.classList.remove("flex");
-      dropdown_menu.classList.add("hidden");
-    }
+function handleInputClick(dropdown_icon, dropdown_menu, event) {
+  // If the dropdown_icon is clicked we want to:
+  if (event.target.parentNode.classList.contains("dropdown-icon")) {
+    toggleDropdown(dropdown_icon, dropdown_menu);
   }
+  // If the input is clicked we want to:
   else {
-    // Show the dropdown and rotate the icon to the down position
-    if (dropdown_icon.style.transform !== "rotate(180deg)") {
-      dropdown_icon.style.transform = "rotate(180deg)";
-      dropdown_menu.classList.remove("hidden");
-      dropdown_menu.classList.add("flex");
-    }
+    openDropdown(dropdown_icon, dropdown_menu);
   }
+}
+
+function acceptSelected(input, dropdown_menu) {
+  // Accept the selected item in the dropdown menu
+  const selected_li = dropdown_menu.querySelector("li[aria-selected='true']");
+  input.value = selected_li.innerText;
+
+  // Hide the dropdown menu
+  closeDropdown(input.parentNode.querySelector(".dropdown-icon"), dropdown_menu);
 }
 
 
