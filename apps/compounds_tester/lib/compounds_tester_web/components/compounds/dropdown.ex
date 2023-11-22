@@ -2,7 +2,7 @@ defmodule Compounds.Dropdown do
   use Phoenix.Component
   alias Phoenix.LiveView.JS
 
-  attr(:id, :string, required: true)
+  attr(:id, :string, default: Compounds.Id.generate("dropdown"))
   attr(:class, :string, default: nil)
   attr(:align_right, :boolean, default: false)
   attr(:rest, :global)
@@ -17,20 +17,23 @@ defmodule Compounds.Dropdown do
       <:trigger>Open</:trigger>
     </.dropdown
   """
-
   def dropdown(assigns) do
-    assigns = assign(assigns, default_classes: "relative mb-20")
-
     ~H"""
     <div
       {@rest}
       id={@id}
-      class={Tails.classes([@default_classes, @class])}
+      class={Tails.classes(["relative mb-20", @class])}
       phx-remove={hide_menu(@id)}
       data-cancel={JS.exec("phx-remove")}
       phx-click-away={hide_menu(@id)}
     >
-      <button id={"#{@id}-popover"} class=" hover:text-zinc-700" phx-click={show_menu(@id)}>
+      <button
+        id={"#{@id}-popover"}
+        aria-controls="menu"
+        aria-expanded={false}
+        class="appearance-none"
+        phx-click={show_menu(@id)}
+      >
         <%= render_slot(@trigger) %>
       </button>
       <.focus_wrap
@@ -41,7 +44,7 @@ defmodule Compounds.Dropdown do
         class={
           Tails.classes([
             "#{if @align_right == true, do: "right-0", else: "left-0"}",
-            "hidden absolute z-10 mt-2 max-w-full sm:w-60 w-full origin-top-right rounded-md border  bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow:hidden"
+            "hidden absolute z-10 mt-2 max-w-full sm:w-60 w-full origin-top-right rounded-md border  bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden"
           ])
         }
         phx-key="escape"
@@ -60,10 +63,12 @@ defmodule Compounds.Dropdown do
   </.item_group>My content</.item_group>
   """
   slot(:inner_block, doc: "The content of the item group")
+  attr(:class, :string, default: nil)
 
+  # TODO: missing Tails.classes()
   def item_group(assigns) do
     ~H"""
-    <div class="border-b last:border-b-0" role="none">
+    <div class={Tails.classes(["last-of-type:border-y-0 border-b", @class])} role="none">
       <%= render_slot(@inner_block) %>
     </div>
     """
@@ -85,6 +90,7 @@ defmodule Compounds.Dropdown do
   """
   attr(:href, :string)
   attr(:rest, :global)
+  attr(:class, :string, default: nil)
   slot(:inner_block, doc: "The content of the item")
   slot(:icon, doc: "Optional icon slot")
 
@@ -94,9 +100,14 @@ defmodule Compounds.Dropdown do
       {@rest}
       href={@href}
       role="menuitem"
-      class="text-sm font-medium leading-6 text-zinc-900 hover:bg-zinc-100 w-full px-4 py-3 flex items-center"
+      class={
+        Tails.classes([
+          "text-sm font-medium leading-6 text-zinc-900  hover:bg-zinc-100 w-full px-4 py-3 flex items-center",
+          @class
+        ])
+      }
     >
-      <%= if @icon != nil do %>
+      <%= if @icon != [] do %>
         <span class="mr-2 -mt-1">
           <%= render_slot(@icon) %>
         </span>
@@ -112,15 +123,24 @@ defmodule Compounds.Dropdown do
   ## Examples
     <.item>Some item</.item>
   """
-
   attr(:rest, :global)
   slot(:inner_block, doc: "The content of the item")
   slot(:icon, doc: "Optional icon slot")
+  attr(:class, :string, default: nil)
 
   def item(assigns) do
     ~H"""
-    <div {@rest} role="none" class="text-sm font-medium leading-6 text-zinc-900 w-full p-4 py-3">
-      <%= if @icon != nil do %>
+    <div
+      {@rest}
+      role="none"
+      class={
+        Tails.classes([
+          "text-sm font-medium leading-6w-full p-4 py-3 text-zinc-900  hover:bg-zinc-100",
+          @class
+        ])
+      }
+    >
+      <%= if @icon != [] do %>
         <span class="mr-2 -mt-1">
           <%= render_slot(@icon) %>
         </span>
@@ -136,6 +156,7 @@ defmodule Compounds.Dropdown do
       transition: {"ease-in-out duration-150", "opacity-100", "opacity-0"},
       time: 150
     )
+    |> JS.remove_attribute("aria-expanded", to: "##{id}-popover")
     |> JS.pop_focus()
   end
 
@@ -145,6 +166,7 @@ defmodule Compounds.Dropdown do
       transition: {"ease-in-out duration-150", "opacity-0", "opacity-100"},
       time: 150
     )
+    |> JS.set_attribute({"aria-expanded", "true"}, to: "##{id}-popover")
     |> JS.focus_first(to: "##{id}-menu")
   end
 end
