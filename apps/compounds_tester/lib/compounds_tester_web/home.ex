@@ -8,7 +8,6 @@ defmodule CompoundsTesterWeb.Home do
   @moduledoc """
   The main page of the application, used to display all components in one showcase.
   """
-  alias CompoundsTesterWeb.CoreComponents
 
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
@@ -16,39 +15,6 @@ defmodule CompoundsTesterWeb.Home do
 
   def render(assigns) do
     ~H"""
-    <Compounds.Navbar.navbar fixed={true}>
-      <:left>
-        <.link navigate={~p"/"} class="flex items-center">
-          <Compounds.Icon.icon src="/images/logo.svg" class="w-6" />
-          <span class="font-medium ml-3 text-md tracking-tight sm:inline-flex hidden">Compounds</span>
-        </.link>
-      </:left>
-      <:middle>
-        <Compounds.Input.input placeholder="Search">
-          <:icon_left>
-            <CompoundsTesterWeb.CoreComponents.icon name="hero-magnifying-glass" />
-          </:icon_left>
-        </Compounds.Input.input>
-      </:middle>
-
-      <:menu>
-        <Compounds.Navbar.menu id="nav_menu">
-          <:item><.link navigate={~p"/"}>Home</.link></:item>
-          <:item><.link navigate={~p"/"}>Deploy</.link></:item>
-          <:item><.link navigate={~p"/"}>Work</.link></:item>
-          <:item><.link navigate={~p"/"}>About</.link></:item>
-        </Compounds.Navbar.menu>
-      </:menu>
-
-      <:menu_trigger>
-        <Compounds.Navbar.menu_trigger target_id="nav_menu">
-          <CoreComponents.icon name="hero-bars-3" class="h-6 w-6" />
-          <:close>
-            <CoreComponents.icon name="hero-x-mark" class="h-6 w-6" />
-          </:close>
-        </Compounds.Navbar.menu_trigger>
-      </:menu_trigger>
-    </Compounds.Navbar.navbar>
     <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full gap-10">
       <div class="grid grid-cols-3 col-span-6 gap-2">
         <Compounds.Input.input>
@@ -209,7 +175,7 @@ defmodule CompoundsTesterWeb.Home do
         <Compounds.Tabs.tabs active_key="1">
           <Compounds.Tabs.tabs_header>
             <Compounds.Tabs.tab key="1">
-              <Compounds.Icon.icon src="/images/logo.svg" class="w-4" />
+              <Compounds.Icon.icon src="/images/logo.svg" />
               <p>Tab 1</p>
             </Compounds.Tabs.tab>
             <Compounds.Tabs.tab key="2" disabled={true}>
