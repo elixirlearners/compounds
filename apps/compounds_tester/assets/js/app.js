@@ -206,11 +206,11 @@ function handleDropdownClick(event) {
 
 
 function handleInputClick(dropdown_icon, dropdown_menu, event) {
-  // If the dropdown_icon is clicked we want to:
+  // Toggle dropdown if the icon is clicked 
   if (event.target.parentNode.classList.contains("dropdown-icon")) {
     toggleDropdown(dropdown_icon, dropdown_menu);
   }
-  // If the input is clicked we want to:
+  // Open dropdown if input is clicked 
   else {
     openDropdown(dropdown_icon, dropdown_menu);
   }
