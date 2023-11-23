@@ -6,8 +6,9 @@ defmodule Compounds.Accordion do
   use Phoenix.Component
   alias Phoenix.LiveView.JS
 
-  attr :class, :string, default: ""
-  attr :title, :string, default: "Title"
+  attr :class, :string, default: nil
+  attr :title, :string, required: true
+  attr :shadow, :boolean, default: false
   attr :expanded?, :boolean, default: false
   attr :id, :string, default: Compounds.Id.generate("contents")
   slot :subtitle, required: false
@@ -21,9 +22,13 @@ defmodule Compounds.Accordion do
     assigns =
       assign(assigns,
         contents_id: Keyword.get(assigns.contents, :id, Compounds.Id.generate("contents")),
-        default_classes: """
-        border border-solid border-border border-x-0
-        """
+        default_classes:
+          "pt-5 pb-5 m-0 " <>
+            if assigns.shadow do
+              "shadow-small border-0 rounded-theme p-gap"
+            else
+              "border border-solid border-border border-x-0 h-fit"
+            end
       )
 
     ~H"""
@@ -38,10 +43,12 @@ defmodule Compounds.Accordion do
         <% end %>
         <div
           id={@contents_id}
-          class="pt-5 pr-0 pb-5 pl-0 leading-6 first:mt-0 last:mb-0 overflow-hidden"
-          hidden
+          phx-hook="Expand"
+          class="max-h-0 pr-0 pl-0 leading-6 first:mt-0 last:mb-0 overflow-hidden"
         >
-          <%= render_slot(@contents) %>
+          <div>
+            <%= render_slot(@contents) %>
+          </div>
         </div>
       </div>
     </div>
@@ -49,19 +56,18 @@ defmodule Compounds.Accordion do
   end
 
   attr :contents_id, :string, required: true
+  attr :class, :string, default: nil
 
   defp accordion_icon(assigns) do
     ~H"""
     <svg
+      id={Compounds.Id.generate("accordion-button")}
+      phx-hook="Flip"
       phx-click={
-        JS.transition({"ease duration-200", "rotate-0", "rotate-180"})
-        |> JS.toggle(
-          in: {"ease delay-200", "h-0", "h-auto"},
-          out: {"ease delay-200", "h-auto", "h-0"},
-          to: "#" <> @contents_id
-        )
+        JS.dispatch("flip")
+        |> JS.dispatch("expand", to: "#" <> @contents_id)
       }
-      class="w-6 h-6"
+      class={Tails.classes(["w-6 h-6", @class])}
       viewBox="0 0 24 24"
       stroke="currentColor"
       strokeWidth="1.5"
@@ -69,6 +75,7 @@ defmodule Compounds.Accordion do
       strokeLinejoin="round"
       fill="none"
       shapeRendering="geometricPrecision"
+      style="color: currentColor;"
     >
       <path d="M6 9l6 6 6-6" />
     </svg>
