@@ -16,79 +16,103 @@ defmodule CompoundsTesterWeb.Home do
   def render(assigns) do
     ~H"""
     <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full gap-10">
-      <div class="grid grid-cols-3 col-span-6 gap-2">
-        <Compounds.Input.input>
-          <:input_block_label>
-            I'm a block label!
-          </:input_block_label>
-        </Compounds.Input.input>
-        <Compounds.Input.input clearable?={true}>
-          <:input_block_label>
-            I'm clearable
-          </:input_block_label>
-        </Compounds.Input.input>
-        <Compounds.Input.input>
-          <:label_right>
-            Label Right
-          </:label_right>
-        </Compounds.Input.input>
-        <Compounds.Input.input>
-          <:label_left>
-            Label Left
-          </:label_left>
-        </Compounds.Input.input>
-        <Compounds.Input.input>
-          <:label_left>
-            Label Left
-          </:label_left>
-          <:label_right>
-            Label Right
-          </:label_right>
-        </Compounds.Input.input>
-        <Compounds.Input.input disabled?={true}>
-          <:label_left>
-            I'm Disabled
-          </:label_left>
-        </Compounds.Input.input>
-        <Compounds.Input.input read_only?={true} placeholder="Cant edit me!">
-          <:label_left>
-            I'm read only
-          </:label_left>
-        </Compounds.Input.input>
-        <Compounds.Input.input placeholder="Icon left">
-          <:icon_left>
-            <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
-          </:icon_left>
-        </Compounds.Input.input>
-        <Compounds.Input.input placeholder="Icon right">
-          <:icon_right>
-            <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
-          </:icon_right>
-        </Compounds.Input.input>
-        <Compounds.Input.input placeholder="Icon right">
-          <:icon_right>
-            <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
-          </:icon_right>
-          <:label_left>
-            Label left
-          </:label_left>
-        </Compounds.Input.input>
-        <Compounds.Input.input placeholder="Icon right">
-          <:icon_right>
-            <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
-          </:icon_right>
-          <:label_right>
-            Label right
-          </:label_right>
-        </Compounds.Input.input>
-        <Compounds.Input.input placeholder="Icon left">
-          <:icon_left>
-            <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
-          </:icon_left>
-          <:label_left>
-            Label left
-          </:label_left>
-        </Compounds.Input.input>
+      <div class="grid grid-cols-2 col-span-6 gap-4">
+        <Compounds.Accordion.accordion shadow={true} title="Card Accordion">
+          <:contents>
+            Contents go here
+          </:contents>
+        </Compounds.Accordion.accordion>
+        <Compounds.Accordion.accordion title="The Accordion">
+          <:contents>
+            Contents go here
+          </:contents>
+        </Compounds.Accordion.accordion>
+        <Compounds.Accordion.accordion title="The Accordion">
+          <:subtitle>I'm a subtitle</:subtitle>
+          <:contents>
+            Contents go here
+          </:contents>
+        </Compounds.Accordion.accordion>
+      </div>
+      <div class="col-span-6">
+        <Compounds.Accordion.accordion title="Inputs">
+          <:contents>
+            <div class="grid grid-cols-3 gap-4 ">
+              <Compounds.Input.input>
+                <:input_block_label>
+                  I'm a block label!
+                </:input_block_label>
+              </Compounds.Input.input>
+              <Compounds.Input.input clearable?={true}>
+                <:input_block_label>
+                  I'm clearable
+                </:input_block_label>
+              </Compounds.Input.input>
+              <Compounds.Input.input>
+                <:label_right>
+                  Label Right
+                </:label_right>
+              </Compounds.Input.input>
+              <Compounds.Input.input>
+                <:label_left>
+                  Label Left
+                </:label_left>
+              </Compounds.Input.input>
+              <Compounds.Input.input>
+                <:label_left>
+                  Label Left
+                </:label_left>
+                <:label_right>
+                  Label Right
+                </:label_right>
+              </Compounds.Input.input>
+              <Compounds.Input.input disabled?={true}>
+                <:label_left>
+                  I'm Disabled
+                </:label_left>
+              </Compounds.Input.input>
+              <Compounds.Input.input read_only?={true} placeholder="Cant edit me!">
+                <:label_left>
+                  I'm read only
+                </:label_left>
+              </Compounds.Input.input>
+              <Compounds.Input.input placeholder="Icon left">
+                <:icon_left>
+                  <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
+                </:icon_left>
+              </Compounds.Input.input>
+              <Compounds.Input.input placeholder="Icon right">
+                <:icon_right>
+                  <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
+                </:icon_right>
+              </Compounds.Input.input>
+              <Compounds.Input.input placeholder="Icon right">
+                <:icon_right>
+                  <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
+                </:icon_right>
+                <:label_left>
+                  Label left
+                </:label_left>
+              </Compounds.Input.input>
+              <Compounds.Input.input placeholder="Icon right">
+                <:icon_right>
+                  <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
+                </:icon_right>
+                <:label_right>
+                  Label right
+                </:label_right>
+              </Compounds.Input.input>
+              <Compounds.Input.input placeholder="Icon left">
+                <:icon_left>
+                  <CompoundsTesterWeb.CoreComponents.icon name="hero-folder" />
+                </:icon_left>
+                <:label_left>
+                  Label left
+                </:label_left>
+              </Compounds.Input.input>
+            </div>
+          </:contents>
+        </Compounds.Accordion.accordion>
       </div>
       <div class="col-span-6">
         <Compounds.Dropdown.dropdown id="my-dropdown">

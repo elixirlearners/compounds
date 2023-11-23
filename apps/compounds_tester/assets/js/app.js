@@ -29,6 +29,39 @@ const tab_prefix = "tab-";
 const content_prefix = "content-";
 
 let Hooks = {}
+
+Hooks.Flip = {
+  mounted() {
+    this.el.setAttribute("data-flipped", "false");
+    this.el.style.transition = "rotate 0.2s ease-out"
+
+    this.el.addEventListener("flip", (event) => {
+      let is_flipped = (/true/i).test(this.el.getAttribute("data-flipped"));
+      if(is_flipped){
+        this.el.style.rotate = "0deg";
+      } else {
+        this.el.style.rotate = "180deg";
+      }
+      this.el.setAttribute("data-flipped", !is_flipped);
+    });
+  }
+}
+
+Hooks.Expand = {
+  mounted() {
+    this.el.style.maxHeight = "0px";
+    this.el.style.transition = "max-height 0.2s ease-out"
+
+    this.el.addEventListener("expand", (event) => {
+      if(this.el.style.maxHeight !== "0px") {
+        this.el.style.maxHeight = "0px";
+      } else {
+        this.el.style.maxHeight = this.el.scrollHeight + "px";
+      }
+    })
+  }
+}
+
 Hooks.ComTabs = {
   mounted() {
     this.el.addEventListener("switch-tabs", (event) => {

@@ -13,12 +13,25 @@ module.exports = {
   ],
   theme: {
     extend: {
+      borderRadius: {
+        theme: "6px"
+      },
+      boxShadow : {
+        small: "0 5px 10px rgba(0, 0, 0, 0.12)",
+        medium: "0 8px 30px rgba(0, 0, 0, 0.12)",
+        large: "0 30px 60px rgba(0, 0, 0, 0.12)",
+        drop_down: "0 4px 4px 0 rgba(0, 0, 0, 0.02)"
+      },
+      transitionProperty: {
+        'height': 'height'
+      },
       spacing: {
         gap: "16pt",
-        gap_half: "8pt"
+        gap_half: "8pt",
       },
       colors: {
         background: "#FFF",
+        border: "#EAEAEA",
         accent_1: "#FAFAFA",
         accent_2: "#EAEAEA",
         accent_3: "#999",
