@@ -1,7 +1,6 @@
 defmodule Compounds.ComboBox do
   use Phoenix.Component
-  # TODO: fix hover and keyboard navigation both selecting elements
-  # TODO: enter on dropdown not open no op
+  # TODO: set enter on dropdown not opened to be a no op
   # TODO: fix clicking on dropdown icon not focusing input
   # TODO: close the dropdown on click away
   # TODO: close the dropdown on escape key
@@ -41,7 +40,7 @@ defmodule Compounds.ComboBox do
         <%= for option <- @options do %>
           <li
             aria-selected="false"
-            class="aria-selected:bg-neutral-200 w-full px-3 py-2 rounded-md text-left hover:bg-neutral-200 cursor-pointer"
+            class="aria-selected:bg-neutral-200 w-full px-3 py-2 rounded-md text-left cursor-pointer"
           >
             <%= option %>
           </li>

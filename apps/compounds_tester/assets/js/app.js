@@ -26,7 +26,6 @@ import topbar from "../vendor/topbar"
 // Compounds custom JS hooks
 // TODO variables should be camelCase, not snake_case. When in rome...
 // TODO document all functions
-// TODO, hovering over a li should mark it as aria-selected
 // ==============================================
 const tab_prefix = "tab-";
 const content_prefix = "content-";
@@ -138,6 +137,7 @@ Hooks.ComCombo = {
     listItems.forEach(item => {
       item.addEventListener('mouseover', () => {
         // Reset aria-selected for all items
+        console.log("hovering");
         listItems.forEach(li => li.setAttribute('aria-selected', 'false'));
         // Set aria-selected true for the hovered item
         item.setAttribute('aria-selected', 'true');
