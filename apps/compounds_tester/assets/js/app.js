@@ -82,13 +82,17 @@ function styleActiveTab(tabs, active_key) {
 
 Hooks.ComCombo = {
   mounted() {
-    // Click events for the combo box
+    // Setup click events for the combo box
     this.el.addEventListener("click", (event) => {
-      const dropdown_icon = this.el.querySelector(".dropdown-icon");
-      const dropdown_menu = this.el.querySelector(".dropdown-menu");
+      const combo_box = this.el;
+      const dropdown_icon = combo_box.querySelector(".dropdown-icon");
+      const dropdown_menu = combo_box.querySelector(".dropdown-menu");
+      const input = combo_box.querySelector(".compounds-input");
+      console.log(input)
+      console.log(dropdown_menu)
       // An element in the dropdown menu was clicked
       if (event.target.parentNode.classList.contains("dropdown-menu")) {
-        handleDropdownClick(event);
+        acceptSelected(input, dropdown_menu);
       }
       // An element in the input wrapper was clicked
       else {
@@ -101,12 +105,11 @@ Hooks.ComCombo = {
       closeDropdown(dropdown_icon, dropdown_menu);
     })
 
-    // Keyboard events for the combo box
+    // Setup keyboard events for the combo box
     this.el.addEventListener("keydown", (event) => {
       const combo_box = this.el;
       const dropdown_menu = combo_box.querySelector(".dropdown-menu");
       const input = combo_box.querySelector(".compounds-input");
-      const dropdown_icon = combo_box.querySelector(".dropdown-icon");
 
       // Query for the selected list item
       let selected_li = combo_box.querySelector("li[aria-selected='true']");
@@ -127,17 +130,19 @@ Hooks.ComCombo = {
           getPreviousSelection(selected_li).setAttribute("aria-selected", "true");
           break;
         case 'Enter':
-          acceptSelected(input, dropdown_menu);
+          // If the dropdown is open, accept the selected item
+          if (!dropdown_menu.classList.contains("hidden")) {
+            acceptSelected(input, dropdown_menu);
+          }
           break;
       }
     })
 
-    // Hover events for each list item
+    // Setup hover events for each list item
     const listItems = this.el.querySelectorAll('.dropdown-menu li');
     listItems.forEach(item => {
       item.addEventListener('mouseover', () => {
         // Reset aria-selected for all items
-        console.log("hovering");
         listItems.forEach(li => li.setAttribute('aria-selected', 'false'));
         // Set aria-selected true for the hovered item
         item.setAttribute('aria-selected', 'true');
@@ -198,12 +203,6 @@ function closeDropdown(dropdown_icon, dropdown_menu) {
   dropdown_menu.classList.add("hidden");
 }
 
-function handleDropdownClick(event) {
-  const dropdown_menu = event.target.parentNode;
-  const input = dropdown_menu.parentNode.querySelector(".compounds-input");
-  acceptSelected(input, dropdown_menu);
-}
-
 
 function handleInputClick(dropdown_icon, dropdown_menu, event) {
   // Toggle dropdown if the icon is clicked 
@@ -221,10 +220,10 @@ function acceptSelected(input, dropdown_menu) {
   const selected_li = dropdown_menu.querySelector("li[aria-selected='true']");
   input.value = selected_li.innerText;
 
-  // Hide the dropdown menu
-  closeDropdown(input.parentNode.querySelector(".dropdown-icon"), dropdown_menu);
-}
+  const dropdown_icon = input.parentNode.querySelector(".dropdown-icon");
 
+  closeDropdown(dropdown_icon, dropdown_menu);
+}
 
 // ==============================================
 
@@ -238,7 +237,7 @@ let liveSocket = new LiveSocket("/live", Socket, {
 
 // Show progress bar on live navigation and form submits
 topbar.config({ barColors: { 0: "#29d" }, shadowColor: "rgba(0, 0, 0, .3)" })
-window.addEventListener("phx:page-loading-start", _info => topbar.show(300))
+window.addEventListener("phx:page-loading-start", _info => topbar.show(301))
 window.addEventListener("phx:page-loading-stop", _info => topbar.hide())
 
 // connect if there are any LiveViews on the page
