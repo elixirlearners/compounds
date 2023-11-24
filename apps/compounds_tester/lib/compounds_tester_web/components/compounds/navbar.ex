@@ -8,8 +8,7 @@ defmodule Compounds.Navbar do
   attr(:id, :string, default: Compounds.Id.generate("navbar"))
   slot(:left, required: true)
   slot(:middle, required: true)
-  slot(:menu, required: true)
-  slot(:menu_trigger)
+  slot(:right, required: true)
 
   def navbar(assigns) do
     ~H"""
@@ -34,8 +33,7 @@ defmodule Compounds.Navbar do
           </div>
 
           <div class="flex items-center lg:order-2">
-            <%= render_slot(@menu, @id) %>
-            <%= render_slot(@menu_trigger) %>
+            <%= render_slot(@right) %>
           </div>
         </div>
       </div>
@@ -44,19 +42,21 @@ defmodule Compounds.Navbar do
   end
 
   attr(:rest, :global)
-  attr(:target_id, :string, doc: "Pass in the ID of the menu to show at small sizes")
+
+  attr(:target_id, :string,
+    doc: "Pass in the ID of the menu, used for toggling visibility at small sizes"
+  )
+
   slot(:inner_block, required: true)
   slot(:close, required: true)
 
   def menu_trigger(assigns) do
-    IO.inspect(assigns)
-
     ~H"""
     <button
       {@rest}
       type="button"
       id={@target_id <> "-popover"}
-      phx-click={toggle_menu(@target_id)}
+      data-menutrigger={@target_id}
       aria-controls={@target_id}
       class="md:hidden"
     >
@@ -66,9 +66,7 @@ defmodule Compounds.Navbar do
     """
   end
 
-  attr(:id, :string,
-    doc: "Pass in the ID of the menu, used for toggling visibility at small sizes"
-  )
+  attr(:id, :string)
 
   slot :item, required: true do
     attr :link, :any, required: true
@@ -80,23 +78,14 @@ defmodule Compounds.Navbar do
     ~H"""
     <div
       id={@id}
-      class="md:visible hidden absolute md:static top-16 left-0 right-0 h-screen z-40 p-4 md:p-0 bg-white"
+      phx-hook="ResponsiveMenu"
+      data-open="false"
+      class="ease-in-out duration-200 hidden absolute md:block md:static top-16 left-0 right-0 h-screen md:h-auto z-40 p-4 md:p-0 bg-white"
     >
       <ul class="md:space-x-4 md:space-y-0 md:flex md:mx-0 mx-auto space-y-3">
         <li :for={item <- @item}><%= render_slot(item) %></li>
       </ul>
     </div>
     """
-  end
-
-  defp toggle_menu(id) do
-    JS.toggle(
-      to: "##{id}",
-      in: {"ease-in-out duration-150", "opacity-0", "opacity-100"},
-      out: {"ease-in-out duration-150", "opacity-100", "opacity-0"},
-      time: 150
-    )
-    |> JS.set_attribute({"aria-expanded", "true"}, to: "##{id}-popover")
-    |> JS.focus_first(to: "##{id}")
   end
 end

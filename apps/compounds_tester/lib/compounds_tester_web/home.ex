@@ -31,23 +31,49 @@ defmodule CompoundsTesterWeb.Home do
         </Compounds.Input.input>
       </:middle>
 
-      <:menu>
+      <:right>
         <Compounds.Navbar.menu id="nav_menu">
-          <:item><.link navigate={~p"/"}>Home</.link></:item>
-          <:item><.link navigate={~p"/"}>Deploy</.link></:item>
-          <:item><.link navigate={~p"/"}>Work</.link></:item>
-          <:item><.link navigate={~p"/"}>About</.link></:item>
+          <:item>
+            <.link
+              navigate={~p"/"}
+              class="p-2 text-sm hover:bg-gray-100 rounded-lg ease-in-out duration-200"
+            >
+              Home
+            </.link>
+          </:item>
+          <:item>
+            <.link
+              navigate={~p"/"}
+              class="p-2 text-sm hover:bg-gray-100 rounded-lg ease-in-out duration-200"
+            >
+              Deploy
+            </.link>
+          </:item>
+          <:item>
+            <.link
+              navigate={~p"/"}
+              class="p-2 text-sm hover:bg-gray-100 rounded-lg ease-in-out duration-200"
+            >
+              Work
+            </.link>
+          </:item>
+          <:item>
+            <.link
+              navigate={~p"/"}
+              class="p-2 text-sm hover:bg-gray-100 rounded-lg ease-in-out duration-200"
+            >
+              About
+            </.link>
+          </:item>
         </Compounds.Navbar.menu>
-      </:menu>
 
-      <:menu_trigger>
         <Compounds.Navbar.menu_trigger target_id="nav_menu">
           <CoreComponents.icon name="hero-bars-3" class="h-6 w-6" />
           <:close>
             <CoreComponents.icon name="hero-x-mark" class="h-6 w-6" />
           </:close>
         </Compounds.Navbar.menu_trigger>
-      </:menu_trigger>
+      </:right>
     </Compounds.Navbar.navbar>
     <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full gap-10">
       <div class="grid grid-cols-3 col-span-6 gap-2">
