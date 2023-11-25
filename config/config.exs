@@ -61,33 +61,6 @@ config :logger, :console,
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
 
-# Import environment specific config. This must remain at the bottom
-# of this file so it overrides the configuration defined above.
-
-config :compounds_tester,
-  ecto_repos: [CompoundsTester.Repo],
-  generators: [timestamp_type: :utc_datetime]
-
-# Configures the endpoint
-config :compounds_tester, CompoundsTesterWeb.Endpoint,
-  url: [host: "localhost"],
-  adapter: Phoenix.Endpoint.Cowboy2Adapter,
-  render_errors: [
-    formats: [html: CompoundsTesterWeb.ErrorHTML, json: CompoundsTesterWeb.ErrorJSON],
-    layout: false
-  ],
-  pubsub_server: CompoundsTester.PubSub,
-  live_view: [signing_salt: "aGmurztb"]
-
-# Configures the mailer
-#
-# By default it uses the "Local" adapter which stores the emails
-# locally. You can see the emails in your browser, at "/dev/mailbox".
-#
-# For production it's recommended to configure a different adapter
-# at the `config/runtime.exs`.
-config :compounds_tester, CompoundsTester.Mailer, adapter: Swoosh.Adapters.Local
-
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
