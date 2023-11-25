@@ -42,7 +42,7 @@ defmodule Compounds.Icon do
 
     if xnor(assigns.src_exists, assigns.inner_block_exists) do
       Logger.warning("You must provide EITHER an SVG element as a child to this component,
-      or a path to the icon's src.")
+      or a path to the icon's src. Warning in #{__ENV__.module} at line #{__ENV__.line}")
     end
 
     ~H"""
