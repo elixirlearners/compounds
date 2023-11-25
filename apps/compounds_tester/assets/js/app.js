@@ -27,10 +27,12 @@ import topbar from "../vendor/topbar";
 
 import ResponsiveMenu from "./responsive-menu";
 import ComTabs from "./tabs";
+import ComCombo from "./combo-box";
 
 let Hooks = {
   ResponsiveMenu,
   ComTabs,
+  ComCombo,
 };
 
 // ==============================================
