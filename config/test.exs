@@ -5,6 +5,64 @@ import Config
 # The MIX_TEST_PARTITION environment variable can be used
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
+config :doc_site, DocSite.Repo,
+  database: Path.expand("../doc_site_test.db", Path.dirname(__ENV__.file)),
+  pool_size: 5,
+  pool: Ecto.Adapters.SQL.Sandbox
+
+# We don't run a server during test. If one is required,
+# you can enable the server option below.
+config :doc_site, DocSiteWeb.Endpoint,
+  http: [ip: {127, 0, 0, 1}, port: 4002],
+  secret_key_base: "k0wvlxkIKXDkRrJcSb1/6/QDse1M18JCOKbuME5XbJsSyDpWBp/VNAAkaK6n7wjm",
+  server: false
+
+# In test we don't send emails.
+config :doc_site, DocSite.Mailer, adapter: Swoosh.Adapters.Test
+
+# Disable swoosh api client as it is only required for production adapters.
+config :swoosh, :api_client, false
+
+# Print only warnings and errors during test
+config :logger, level: :warning
+
+# Initialize plugs at runtime for faster test compilation
+config :phoenix, :plug_init_mode, :runtime
+
+# Configure your database
+#
+# The MIX_TEST_PARTITION environment variable can be used
+# to provide built-in test partitioning in CI environment.
+# Run `mix help test` for more information.
+config :doc_site, DocSite.Repo,
+  database: Path.expand("../doc_site_test.db", Path.dirname(__ENV__.file)),
+  pool_size: 5,
+  pool: Ecto.Adapters.SQL.Sandbox
+
+# We don't run a server during test. If one is required,
+# you can enable the server option below.
+config :doc_site, DocSiteWeb.Endpoint,
+  http: [ip: {127, 0, 0, 1}, port: 4002],
+  secret_key_base: "Wv5hDoOrhx/9bt7hfZij0Zs4mVAudhdAywz6PwPsF4/E2xjZZko3YaGYgc/G2qTI",
+  server: false
+
+# In test we don't send emails.
+config :doc_site, DocSite.Mailer, adapter: Swoosh.Adapters.Test
+
+# Disable swoosh api client as it is only required for production adapters.
+config :swoosh, :api_client, false
+
+# Print only warnings and errors during test
+config :logger, level: :warning
+
+# Initialize plugs at runtime for faster test compilation
+config :phoenix, :plug_init_mode, :runtime
+
+# Configure your database
+#
+# The MIX_TEST_PARTITION environment variable can be used
+# to provide built-in test partitioning in CI environment.
+# Run `mix help test` for more information.
 config :compounds_tester, CompoundsTester.Repo,
   username: "postgres",
   password: "postgres",
