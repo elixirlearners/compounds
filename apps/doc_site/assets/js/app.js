@@ -27,6 +27,7 @@ import topbar from "../vendor/topbar";
 
 import ResponsiveMenu from "./responsive-menu";
 import ComTabs from "./tabs";
+import ComCombo from "./combo-box";
 import Flip from "./flip";
 import Expand from "./expand";
 
@@ -34,7 +35,8 @@ let Hooks = {
   ResponsiveMenu,
   ComTabs,
   Flip,
-  Expand
+  Expand,
+  ComCombo
 };
 
 // ==============================================
