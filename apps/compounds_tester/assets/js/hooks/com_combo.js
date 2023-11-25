@@ -18,7 +18,7 @@ export default ComCombo = {
   }
 }
 
-// Setup hover events for each option in the dropdown menu 
+// Setup hover events for each option in the dropdown menu
 function setupHoverEvents(combo_box, dropdown_menu) {
   // On hover, set aria-selected to true for the hovered item
   // and false for all other items
@@ -47,7 +47,7 @@ function handleInput(event, combo_box, dropdown_icon, dropdown_menu) {
     }
   });
 
-  // Make the first visible option the selected one 
+  // Make the first visible option the selected one
   const first_visible_option = combo_box.querySelector(".dropdown-menu li:not(.hidden)");
   if (first_visible_option) {
     clearSelections(dropdown_menu);
@@ -61,7 +61,7 @@ function handleKeyDown(event, combo_box, dropdown_menu, input) {
   // Query for the first selected option
   let selected_option = combo_box.querySelector("li[aria-selected='true']");
 
-  // If there is no selected option, select the first one 
+  // If there is no selected option, select the first one
   if (!selected_option) {
     selected_option = combo_box.querySelector("li");
     selected_option.setAttribute("aria-selected", "true");
@@ -104,11 +104,11 @@ function handleComboClick(event, dropdown_icon, dropdown_menu, input) {
 
   // An element in the input wrapper was clicked
   if (event.target.parentNode.classList.contains("dropdown-icon")) {
-    // Toggle dropdown if the icon is clicked 
+    // Toggle dropdown if the icon is clicked
     toggleDropdown(dropdown_icon, dropdown_menu);
   }
   else {
-    // Open dropdown if input is clicked 
+    // Open dropdown if input is clicked
     openDropdown(dropdown_icon, dropdown_menu);
   }
 }
@@ -119,7 +119,7 @@ function clearSelections(dropdown_menu) {
   listItems.forEach(item => item.setAttribute("aria-selected", "false"));
 }
 
-// Get the next selection in the dropdown menu. 
+// Get the next selection in the dropdown menu.
 // Loop back to the first option if necessary.
 function getNextSelection(element) {
   if (element.nextElementSibling) {
