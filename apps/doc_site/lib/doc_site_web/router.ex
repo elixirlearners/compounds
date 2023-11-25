@@ -18,6 +18,7 @@ defmodule DocSiteWeb.Router do
     pipe_through :browser
 
     live "/", HomeController
+    live "/:component_name", HomeController
   end
 
   # Other scopes may use custom stacks.

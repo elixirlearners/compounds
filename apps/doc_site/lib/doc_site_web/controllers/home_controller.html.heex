@@ -1,34 +1,20 @@
-<!-- Component List
-  accordion.ex
-  button.ex
-  card.ex
-  checkbox.ex
-  dropdown.ex
-  icon.ex
-  input.ex
-  navbar.ex
-  spinner.ex
-  tabs.ex
-  toast.ex
--->
-<div class="grid grid-cols-12 gap-x-8">
-  <div class="col-span-4">
+<div class="w-full grid grid-cols-4 gap-4">
+  <div class="col-span-1">
     <ul>
-      <li>Accordion</li>
-      <li>Button</li>
-      <li>Card</li>
-      <li>Checkbox</li>
-      <li>Dropdown</li>
-      <li>Icon</li>
-      <li>Input</li>
-      <li>Navbar</li>
-      <li>Spinner</li>
-      <li>Tabs</li>
-      <li>Toast</li>
+      <%= for component <- @components do %>
+        <li class="mb-6">
+          <.link href="#" navigate={~p"/#{component}"}>
+            <%= component %>
+          </.link>
+        </li>
+      <% end %>
     </ul>
   </div>
 
-  <div class="col-span-8">
-    <p>stuff here</p>
+  <div class="w-full col-span-3">
+    <%= if @selected_component do %>
+      <h1 class="capitalize text-2xl font-bold pb-8"><%= @selected_component %></h1>
+      <.render_component_example name={@selected_component}/>
+    <% end %>
   </div>
 </div>
