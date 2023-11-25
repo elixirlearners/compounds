@@ -9,13 +9,15 @@ defmodule CompoundsTesterWeb.Home do
   The main page of the application, used to display all components in one showcase.
   """
 
+  alias CompoundsTesterWeb.CoreComponents
+
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
   end
 
   def render(assigns) do
     ~H"""
-    <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full gap-10">
+    <div class="p-16 h-full w-full flex flex-col items-center space-y-28">
       <div class="grid grid-cols-2 col-span-6 gap-4">
         <Compounds.Accordion.accordion shadow={true} title="Card Accordion">
           <:contents>
@@ -34,7 +36,7 @@ defmodule CompoundsTesterWeb.Home do
           </:contents>
         </Compounds.Accordion.accordion>
       </div>
-      <div class="col-span-6">
+      <div class="">
         <Compounds.Accordion.accordion title="Inputs">
           <:contents>
             <div class="grid grid-cols-3 gap-4 ">
@@ -114,8 +116,8 @@ defmodule CompoundsTesterWeb.Home do
           </:contents>
         </Compounds.Accordion.accordion>
       </div>
-      <div class="col-span-6">
-        <Compounds.Dropdown.dropdown id="my-dropdown">
+      <div class="w-fit -mb-20">
+        <Compounds.Dropdown.dropdown class="w-56" id="my-dropdown">
           <:trigger>
             Open
           </:trigger>
@@ -158,7 +160,7 @@ defmodule CompoundsTesterWeb.Home do
         </Compounds.Dropdown.dropdown>
       </div>
 
-      <div>
+      <div class="">
         <Compounds.Card.card>
           <Compounds.Card.header>
             <Compounds.Card.title>
@@ -185,7 +187,6 @@ defmodule CompoundsTesterWeb.Home do
               <Compounds.Button.button type="secondary">
                 Cancel
               </Compounds.Button.button>
-              <Compounds.Button.button></Compounds.Button.button>
               <Compounds.Button.button>
                 Deploy
               </Compounds.Button.button>
