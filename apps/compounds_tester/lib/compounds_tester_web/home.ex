@@ -9,8 +9,6 @@ defmodule CompoundsTesterWeb.Home do
   The main page of the application, used to display all components in one showcase.
   """
 
-  # TODO: scale component default size down
-
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
   end
@@ -19,9 +17,53 @@ defmodule CompoundsTesterWeb.Home do
   def render(assigns) do
     ~H"""
     <div class="p-16 h-full w-full flex flex-col items-center space-y-16">
-      <div class="w-[50rem] h-[18rem]">
+      <div class="">
+        <h3>Demo: Default</h3>
         <Compounds.ComboBox.combo_box>
           <Compounds.ComboBox.input_wrapper>
+            <CompoundsTesterWeb.CoreComponents.icon
+              name="hero-magnifying-glass"
+              class="h-[1.15rem] w-[1.15rem] bg-neutral-500"
+            />
+            <Compounds.ComboBox.input class="" />
+            <Compounds.ComboBox.dropdown_icon>
+              <CompoundsTesterWeb.CoreComponents.icon
+                name="hero-chevron-down"
+                class="h-[1.15rem] w-[1.15rem] bg-neutral-500 cursor-pointer group-hover:bg-black transition ease-out duration-200"
+              />
+            </Compounds.ComboBox.dropdown_icon>
+          </Compounds.ComboBox.input_wrapper>
+          <Compounds.ComboBox.dropdown_menu options={["React", "Next.JS", "Remix", "Phoenix"]} />
+        </Compounds.ComboBox.combo_box>
+      </div>
+
+      <div class="">
+        <h3>Demo: Long</h3>
+        <Compounds.ComboBox.combo_box>
+          <Compounds.ComboBox.input_wrapper class="w-96">
+            <CompoundsTesterWeb.CoreComponents.icon
+              name="hero-magnifying-glass"
+              class="h-[1.15rem] w-[1.15rem] bg-neutral-500"
+            />
+            <Compounds.ComboBox.input class="" />
+            <Compounds.ComboBox.dropdown_icon>
+              <CompoundsTesterWeb.CoreComponents.icon
+                name="hero-chevron-down"
+                class="h-[1.15rem] w-[1.15rem] bg-neutral-500 cursor-pointer group-hover:bg-black transition ease-out duration-200"
+              />
+            </Compounds.ComboBox.dropdown_icon>
+          </Compounds.ComboBox.input_wrapper>
+          <Compounds.ComboBox.dropdown_menu
+            class="w-96"
+            options={["React", "Next.JS", "Remix", "Phoenix"]}
+          />
+        </Compounds.ComboBox.combo_box>
+      </div>
+
+      <div class="">
+        <h3>Demo: Larger</h3>
+        <Compounds.ComboBox.combo_box>
+          <Compounds.ComboBox.input_wrapper class="w-[40rem] text-base">
             <CompoundsTesterWeb.CoreComponents.icon
               name="hero-magnifying-glass"
               class="h-5 w-5 bg-neutral-500"
@@ -34,7 +76,10 @@ defmodule CompoundsTesterWeb.Home do
               />
             </Compounds.ComboBox.dropdown_icon>
           </Compounds.ComboBox.input_wrapper>
-          <Compounds.ComboBox.dropdown_menu options={["React", "Next.JS", "Remix", "Phoenix"]} />
+          <Compounds.ComboBox.dropdown_menu
+            class="w-[40rem] text-base"
+            options={["React", "Next.JS", "Remix", "Phoenix"]}
+          />
         </Compounds.ComboBox.combo_box>
       </div>
 

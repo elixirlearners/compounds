@@ -14,7 +14,7 @@ export default ComCombo = {
   },
 
   destroyed() {
-    console.log("Destroyed")
+    // TODO: remove all event listeners
   }
 }
 

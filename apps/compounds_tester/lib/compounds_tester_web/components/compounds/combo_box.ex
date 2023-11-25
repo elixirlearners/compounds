@@ -1,6 +1,11 @@
 defmodule Compounds.ComboBox do
   use Phoenix.Component
 
+  # 1.0 todos
+  # TODO: Add "no result" text
+  # TODO: disabled status
+  # TODO: error status
+
   slot :inner_block
   attr :options, :list, default: []
   attr :selected, :string, default: nil
@@ -14,7 +19,7 @@ defmodule Compounds.ComboBox do
     <div
       class={
         Tails.classes([
-          "flex flex-col space-y-3",
+          "flex flex-col space-y-3 w-fit h-fit relative",
           @class
         ])
       }
@@ -37,7 +42,7 @@ defmodule Compounds.ComboBox do
     <div
       class={
         Tails.classes([
-          "flex items-center space-x-4 rounded-md px-5 border
+          "flex items-center space-x-3 rounded-md px-3 border w-64 text-sm
          border-neutral-400 focus-within:ring-4 focus-within:ring-neutral-300 transition duration-200",
           @class
         ])
@@ -59,7 +64,7 @@ defmodule Compounds.ComboBox do
     <input
       class={
         Tails.classes([
-          "compounds-input h-full flex-1 px-2 py-[0.7rem] outline-none placeholder-neutral-400"
+          "compounds-input h-full w-full flex-1 py-[0.7rem] outline-none placeholder-neutral-400"
         ])
       }
       placeholder={@placeholder}
@@ -90,8 +95,16 @@ defmodule Compounds.ComboBox do
 
   def dropdown_menu(assigns) do
     ~H"""
-    <ul class={Tails.classes(["dropdown-menu flex-col items-center justify-center
-      hidden w-full rounded-md px-2 py-3 border border-neutral-400", @class])} {@rest}>
+    <ul
+      class={
+        Tails.classes([
+          "dropdown-menu absolute top-full z-10 bg-white flex-col items-center justify-center text-sm
+      hidden w-64 rounded-md px-2 py-3 border border-neutral-400",
+          @class
+        ])
+      }
+      {@rest}
+    >
       <%= for option <- @options do %>
         <li
           aria-selected="false"
