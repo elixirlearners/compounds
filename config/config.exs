@@ -7,20 +7,20 @@
 # General application configuration
 import Config
 
-config :compounds_tester,
-  ecto_repos: [CompoundsTester.Repo],
+config :doc_site,
+  ecto_repos: [DocSite.Repo],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
-config :compounds_tester, CompoundsTesterWeb.Endpoint,
+config :doc_site, DocSiteWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Phoenix.Endpoint.Cowboy2Adapter,
   render_errors: [
-    formats: [html: CompoundsTesterWeb.ErrorHTML, json: CompoundsTesterWeb.ErrorJSON],
+    formats: [html: DocSiteWeb.ErrorHTML, json: DocSiteWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: CompoundsTester.PubSub,
-  live_view: [signing_salt: "aGmurztb"]
+  pubsub_server: DocSite.PubSub,
+  live_view: [signing_salt: "clgGRur0"]
 
 # Configures the mailer
 #
@@ -29,7 +29,7 @@ config :compounds_tester, CompoundsTesterWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :compounds_tester, CompoundsTester.Mailer, adapter: Swoosh.Adapters.Local
+config :doc_site, DocSite.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
@@ -37,7 +37,7 @@ config :esbuild,
   default: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
-    cd: Path.expand("../apps/compounds_tester/assets", __DIR__),
+    cd: Path.expand("../apps/doc_site/assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
@@ -50,8 +50,16 @@ config :tailwind,
       --input=css/app.css
       --output=../priv/static/assets/app.css
     ),
-    cd: Path.expand("../apps/compounds_tester/assets", __DIR__)
+    cd: Path.expand("../apps/doc_site/assets", __DIR__)
   ]
+
+# Configures Elixir's Logger
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id]
+
+# Use Jason for JSON parsing in Phoenix
+config :phoenix, :json_library, Jason
 
 # Configures Elixir's Logger
 config :logger, :console,
