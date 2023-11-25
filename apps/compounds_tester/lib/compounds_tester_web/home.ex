@@ -9,13 +9,75 @@ defmodule CompoundsTesterWeb.Home do
   The main page of the application, used to display all components in one showcase.
   """
 
+  alias CompoundsTesterWeb.CoreComponents
+
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
   end
 
   def render(assigns) do
     ~H"""
-    <div class="grid grid-cols-6 gap-y-12 p-16 h-full w-full gap-10">
+    <Compounds.Navbar.navbar fixed={true}>
+      <:left>
+        <.link navigate={~p"/"} class="flex items-center">
+          <Compounds.Icon.icon src="/images/logo.svg" class="w-6" />
+          <span class="font-medium ml-3 text-md tracking-tight sm:inline-flex hidden">Compounds</span>
+        </.link>
+      </:left>
+      <:middle>
+        <Compounds.Input.input placeholder="Search">
+          <:icon_left>
+            <CompoundsTesterWeb.CoreComponents.icon name="hero-magnifying-glass" />
+          </:icon_left>
+        </Compounds.Input.input>
+      </:middle>
+
+      <:right>
+        <Compounds.Navbar.menu id="nav_menu">
+          <:item>
+            <.link
+              navigate={~p"/"}
+              class="p-2 text-sm hover:bg-gray-100 rounded-lg ease-in-out duration-200"
+            >
+              Home
+            </.link>
+          </:item>
+          <:item>
+            <.link
+              navigate={~p"/"}
+              class="p-2 text-sm hover:bg-gray-100 rounded-lg ease-in-out duration-200"
+            >
+              Deploy
+            </.link>
+          </:item>
+          <:item>
+            <.link
+              navigate={~p"/"}
+              class="p-2 text-sm hover:bg-gray-100 rounded-lg ease-in-out duration-200"
+            >
+              Work
+            </.link>
+          </:item>
+          <:item>
+            <.link
+              navigate={~p"/"}
+              class="p-2 text-sm hover:bg-gray-100 rounded-lg ease-in-out duration-200"
+            >
+              About
+            </.link>
+          </:item>
+        </Compounds.Navbar.menu>
+
+        <Compounds.Navbar.menu_trigger target_id="nav_menu">
+          <CoreComponents.icon name="hero-bars-3" class="h-6 w-6" />
+          <:close>
+            <CoreComponents.icon name="hero-x-mark" class="h-6 w-6" />
+          </:close>
+        </Compounds.Navbar.menu_trigger>
+      </:right>
+    </Compounds.Navbar.navbar>
+
+    <div class="p-16 h-full w-full flex flex-col items-center space-y-28">
       <div class="grid grid-cols-2 col-span-6 gap-4">
         <Compounds.Accordion.accordion shadow={true} title="Card Accordion">
           <:contents>
@@ -34,7 +96,7 @@ defmodule CompoundsTesterWeb.Home do
           </:contents>
         </Compounds.Accordion.accordion>
       </div>
-      <div class="col-span-6">
+      <div class="">
         <Compounds.Accordion.accordion title="Inputs">
           <:contents>
             <div class="grid grid-cols-3 gap-4 ">
@@ -114,8 +176,8 @@ defmodule CompoundsTesterWeb.Home do
           </:contents>
         </Compounds.Accordion.accordion>
       </div>
-      <div class="col-span-6">
-        <Compounds.Dropdown.dropdown id="my-dropdown">
+      <div class="w-fit -mb-20">
+        <Compounds.Dropdown.dropdown class="w-56" id="my-dropdown">
           <:trigger>
             Open
           </:trigger>
@@ -158,7 +220,7 @@ defmodule CompoundsTesterWeb.Home do
         </Compounds.Dropdown.dropdown>
       </div>
 
-      <div>
+      <div class="">
         <Compounds.Card.card>
           <Compounds.Card.header>
             <Compounds.Card.title>
@@ -182,14 +244,12 @@ defmodule CompoundsTesterWeb.Home do
           </Compounds.Card.content>
           <Compounds.Card.footer>
             <div class="w-full flex justify-between">
-              <!--
-              <Compounds.Button.button>
+              <Compounds.Button.button type="secondary">
                 Cancel
               </Compounds.Button.button>
               <Compounds.Button.button>
                 Deploy
               </Compounds.Button.button>
-    -->
             </div>
           </Compounds.Card.footer>
         </Compounds.Card.card>
