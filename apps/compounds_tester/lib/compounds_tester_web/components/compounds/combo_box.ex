@@ -1,12 +1,5 @@
 defmodule Compounds.ComboBox do
   use Phoenix.Component
-  # TODO: set enter on dropdown not opened to be a no op
-  # TODO: fix clicking on dropdown icon not focusing input
-  # TODO: close the dropdown on click away
-  # TODO: close the dropdown on escape key
-  # TODO: focus input when dropdown icon is clicked
-  # TODO: clear button
-  # TODO: final visual cleanup
 
   slot :inner_block
   attr :options, :list, default: []
@@ -29,23 +22,7 @@ defmodule Compounds.ComboBox do
       id={@id}
       {@rest}
     >
-      <!-- Input wrapper -->
       <%= render_slot(@inner_block) %>
-      <!-- Dropdown Menu -->
-      <ul
-        id={Compounds.Id.generate("dropdown-menu")}
-        class="dropdown-menu flex-col items-center justify-center hidden w-full
-        rounded-md px-2 py-3 border border-neutral-400"
-      >
-        <%= for option <- @options do %>
-          <li
-            aria-selected="false"
-            class="aria-selected:bg-neutral-200 w-full px-3 py-2 rounded-md text-left cursor-pointer"
-          >
-            <%= option %>
-          </li>
-        <% end %>
-      </ul>
     </div>
     """
   end
@@ -57,13 +34,16 @@ defmodule Compounds.ComboBox do
   def input_wrapper(assigns) do
     ~H"""
     <!-- Input Wrapper -->
-    <div class={
-      Tails.classes([
-        "flex items-center space-x-4 rounded-md px-5 py-3 border
-         border-neutral-400 focus-within:ring-4 focus-within:ring-neutral-300",
-        @class
-      ])
-    }>
+    <div
+      class={
+        Tails.classes([
+          "flex items-center space-x-4 rounded-md px-5 border
+         border-neutral-400 focus-within:ring-4 focus-within:ring-neutral-300 transition duration-200",
+          @class
+        ])
+      }
+      {@rest}
+    >
       <%= render_slot(@inner_block) %>
     </div>
     """
@@ -77,7 +57,11 @@ defmodule Compounds.ComboBox do
     ~H"""
     <!-- The compounds-input class is used by the ComCombo hook to fill in inputs -->
     <input
-      class={Tails.classes(["compounds-input flex-1 px-2 outline-none  placeholder-neutral-400"])}
+      class={
+        Tails.classes([
+          "compounds-input h-full flex-1 px-2 py-[0.7rem] outline-none placeholder-neutral-400"
+        ])
+      }
       placeholder={@placeholder}
       {@rest}
     />
@@ -91,11 +75,32 @@ defmodule Compounds.ComboBox do
   def dropdown_icon(assigns) do
     ~H"""
     <!-- The dropdown-icon class is used by the ComCombo hook to transform the icon -->
-    <div class={
-      Tails.classes(["dropdown-icon transition-transform duration-200 ease-in-out", @class])
-    }>
+    <button
+      class={Tails.classes(["dropdown-icon transition ease-in-out duration-200 group", @class])}
+      {@rest}
+    >
       <%= render_slot(@inner_block) %>
-    </div>
+    </button>
+    """
+  end
+
+  attr :options, :list, default: []
+  attr :class, :string, default: nil
+  attr :rest, :global
+
+  def dropdown_menu(assigns) do
+    ~H"""
+    <ul class={Tails.classes(["dropdown-menu flex-col items-center justify-center
+      hidden w-full rounded-md px-2 py-3 border border-neutral-400", @class])} {@rest}>
+      <%= for option <- @options do %>
+        <li
+          aria-selected="false"
+          class="aria-selected:bg-neutral-200 w-full p-2 rounded-md text-left cursor-pointer"
+        >
+          <%= option %>
+        </li>
+      <% end %>
+    </ul>
     """
   end
 end

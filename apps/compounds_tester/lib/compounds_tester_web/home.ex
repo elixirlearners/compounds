@@ -9,13 +9,35 @@ defmodule CompoundsTesterWeb.Home do
   The main page of the application, used to display all components in one showcase.
   """
 
+  # TODO: scale component default size down
+
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
   end
 
+  @spec render(any()) :: Phoenix.LiveView.Rendered.t()
   def render(assigns) do
     ~H"""
     <div class="p-16 h-full w-full flex flex-col items-center space-y-16">
+      <div class="w-[50rem] h-[18rem]">
+        <Compounds.ComboBox.combo_box>
+          <Compounds.ComboBox.input_wrapper>
+            <CompoundsTesterWeb.CoreComponents.icon
+              name="hero-magnifying-glass"
+              class="h-5 w-5 bg-neutral-500"
+            />
+            <Compounds.ComboBox.input />
+            <Compounds.ComboBox.dropdown_icon>
+              <CompoundsTesterWeb.CoreComponents.icon
+                name="hero-chevron-down"
+                class="h-5 w-5 bg-neutral-500 cursor-pointer group-hover:bg-black transition ease-out duration-200"
+              />
+            </Compounds.ComboBox.dropdown_icon>
+          </Compounds.ComboBox.input_wrapper>
+          <Compounds.ComboBox.dropdown_menu options={["React", "Next.JS", "Remix", "Phoenix"]} />
+        </Compounds.ComboBox.combo_box>
+      </div>
+
       <div class="w-56">
         <Compounds.Dropdown.dropdown id="my-dropdown">
           <:trigger>
@@ -121,24 +143,6 @@ defmodule CompoundsTesterWeb.Home do
             </Compounds.Tabs.content>
           </Compounds.Tabs.tabs_content>
         </Compounds.Tabs.tabs>
-      </div>
-
-      <div class="w-[50rem]">
-        <Compounds.ComboBox.combo_box options={["React", "Next.JS", "Remix", "Phoenix"]}>
-          <Compounds.ComboBox.input_wrapper>
-            <CompoundsTesterWeb.CoreComponents.icon
-              name="hero-magnifying-glass"
-              class="h-5 w-5 bg-neutral-600"
-            />
-            <Compounds.ComboBox.input />
-            <Compounds.ComboBox.dropdown_icon>
-              <CompoundsTesterWeb.CoreComponents.icon
-                name="hero-chevron-down"
-                class="h-5 w-5 bg-neutral-600 cursor-pointer"
-              />
-            </Compounds.ComboBox.dropdown_icon>
-          </Compounds.ComboBox.input_wrapper>
-        </Compounds.ComboBox.combo_box>
       </div>
     </div>
     """
