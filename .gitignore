@@ -22,3 +22,10 @@ erl_crash.dump
 # Temporary files, for example, from tests.
 /tmp/
 doc_site_dev.db
+apps/doc_site/assets/vendor/heroicons/LICENSE.md
+apps/doc_site/assets/vendor/heroicons/UPGRADE.md
+apps/doc_site/assets/vendor/vendor/heroicons/LICENSE.md
+apps/doc_site/assets/vendor/vendor/heroicons/UPGRADE.md
+doc_site_test.db
+doc_site_test.db-shm
+doc_site_test.db-wal
