@@ -6,10 +6,12 @@ export default {
       if(this.el.classList.contains("checked")){
         this.el.classList.add(bg_color);
         this.el.firstElementChild.classList.add("left-[calc(100%_-_0.875rem_-_2px)]");
+        this.el.firstElementChild.classList.remove("left-px");
         this.el.firstElementChild.classList.add("shadow-none");
       } else {
         this.el.classList.remove(bg_color);
         this.el.firstElementChild.classList.remove("left-[calc(100%_-_0.875rem_-_2px)]");
+        this.el.firstElementChild.classList.add("left-px");
         this.el.firstElementChild.classList.remove("shadow-none");
       }
     });
