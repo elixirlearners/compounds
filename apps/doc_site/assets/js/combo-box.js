@@ -5,6 +5,15 @@ export default ComCombo = {
     const dropdown_menu = combo_box.querySelector(".dropdown-menu");
     const input = combo_box.querySelector(".compounds-input");
 
+    this.destructor = () => {
+      combo_box.removeEventListener("click", handleComboClick);
+      document.removeEventListener("click", handleDocumentClick);
+      combo_box.removeEventListener("keydown", handleKeyDown);
+      input.removeEventListener("input", handleInput);
+      removeHoverEvents(combo_box, dropdown_menu);
+    }
+
+
     // Setup event listeners on mounted.
     combo_box.addEventListener("click", event => handleComboClick(event, dropdown_icon, dropdown_menu, input));
     document.addEventListener("click", event => handleDocumentClick(event, combo_box, dropdown_icon, dropdown_menu));
@@ -14,7 +23,7 @@ export default ComCombo = {
   },
 
   destroyed() {
-    // TODO: remove all event listeners
+    this.destructor();
   }
 }
 
@@ -31,6 +40,16 @@ function setupHoverEvents(combo_box, dropdown_menu) {
   });
 }
 
+// Remove hover events for each option in the dropdown menu
+function removeHoverEvents(combo_box, dropdown_menu) {
+  const options = combo_box.querySelectorAll('.dropdown-menu li');
+  options.forEach(option => {
+    option.removeEventListener('mouseover', () => {
+      clearSelections(dropdown_menu);
+      option.setAttribute('aria-selected', 'true');
+    });
+  })
+}
 
 // Handles the input event for the combo box.
 function handleInput(event, combo_box, dropdown_icon, dropdown_menu) {
@@ -53,8 +72,6 @@ function handleInput(event, combo_box, dropdown_icon, dropdown_menu) {
     clearSelections(dropdown_menu);
     first_visible_option.setAttribute("aria-selected", "true");
   }
-
-
 }
 
 function handleKeyDown(event, combo_box, dropdown_menu, input) {

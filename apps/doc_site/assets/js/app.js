@@ -31,6 +31,7 @@ import ComCombo from "./combo-box";
 import Flip from "./flip";
 import Expand from "./expand";
 import Toggle from "./toggle";
+import ComTextArea from "./text-area";
 
 let Hooks = {
   ResponsiveMenu,
@@ -38,7 +39,8 @@ let Hooks = {
   Flip,
   Expand,
   ComCombo,
-  Toggle
+  Toggle,
+  ComTextArea,
 };
 
 // ==============================================

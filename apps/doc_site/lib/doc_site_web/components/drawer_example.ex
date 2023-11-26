@@ -1,8 +1,6 @@
 defmodule DocSiteWeb.DrawerExample do
   use DocSiteWeb, :live_component
 
-  alias DocSiteWeb.CoreComponents
-
   def mount(_params, _session, socket) do
     {:ok, assign(socket, %{})}
   end
