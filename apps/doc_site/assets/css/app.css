@@ -9,7 +9,8 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-/* This file is for your main application CSS */
+/* Spinner Custom CSS
+==================================================== */
 div.compounds-spinner div.compounds-bar1 {
 -webkit-transform:rotate(0deg) translate(0, -130%);
 -webkit-animation-delay: 0s;
@@ -60,3 +61,4 @@ div.compounds-spinner div.compounds-bar12 {
 -webkit-transform:rotate(330deg) translate(0, -130%);
 -webkit-animation-delay: -0.0833s;
 }
+/* ================================================== */

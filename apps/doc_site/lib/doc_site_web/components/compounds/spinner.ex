@@ -40,7 +40,7 @@ defmodule Compounds.Spinner do
       to {opacity: <%= @opacity_end %>;}
       }
     </style>
-
+    <!-- The compounds-spinner class applies the CSS -->
     <div
       class={Tails.classes(["#{@spinner_class} compounds-spinner w-10 h-10 relative", @class])}
       {@rest}

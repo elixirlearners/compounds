@@ -32,6 +32,7 @@ defmodule DocSiteWeb.HomeController do
     {:ok, assign(socket, %{component_name: nil, components: components})}
   end
 
+  # Set selected_component to the current URL param component_name whenever there's a live patch event
   def handle_params(%{"component_name" => component_name} = _params, _uri, socket) do
     {:noreply, assign(socket, :selected_component, String.downcase(component_name))}
   end
