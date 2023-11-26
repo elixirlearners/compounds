@@ -80,7 +80,7 @@ defmodule Compounds.Navbar do
       id={@id}
       phx-hook="ResponsiveMenu"
       data-open="false"
-      class="ease-in-out duration-200 hidden absolute md:block md:static top-16 left-0 right-0 h-screen md:h-auto z-40 p-4 md:p-0 bg-white"
+      class="hidden absolute md:block md:static top-16 left-0 right-0 h-screen md:h-auto z-40 p-4 md:p-0 bg-white"
     >
       <ul class="md:space-x-4 md:space-y-0 md:flex md:mx-0 mx-auto space-y-3">
         <li :for={item <- @item}><%= render_slot(item) %></li>

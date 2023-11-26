@@ -10,11 +10,14 @@ defmodule Compounds.ComboBox do
   attr :options, :list, default: []
   attr :selected, :string, default: nil
   attr :class, :string, default: nil
-  attr :id, :string, default: Compounds.Id.generate("combo-box")
+  attr :id, :string
   attr :rest, :global
 
   @spec combo_box(map()) :: Phoenix.LiveView.Rendered.t()
+
   def combo_box(assigns) do
+    assigns = assign(assigns, id: assigns[:id] || Compounds.Id.generate("combo-box"))
+
     ~H"""
     <div
       class={

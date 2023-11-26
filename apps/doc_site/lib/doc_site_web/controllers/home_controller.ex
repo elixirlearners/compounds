@@ -22,6 +22,7 @@ defmodule DocSiteWeb.HomeController do
       "Spinner",
       "Table",
       "Tabs",
+      "Text",
       "TextArea",
       "Toast",
       "Toggle",
@@ -32,6 +33,7 @@ defmodule DocSiteWeb.HomeController do
     {:ok, assign(socket, %{component_name: nil, components: components})}
   end
 
+  # Set selected_component to the current URL param component_name whenever there's a live patch event
   def handle_params(%{"component_name" => component_name} = _params, _uri, socket) do
     {:noreply, assign(socket, :selected_component, String.downcase(component_name))}
   end
@@ -151,6 +153,12 @@ defmodule DocSiteWeb.HomeController do
   def render_component_example(%{name: "tabs"} = assigns) do
     ~H"""
     <DocSiteWeb.TabsExample.render />
+    """
+  end
+
+  def render_component_example(%{name: "text"} = assigns) do
+    ~H"""
+    <DocSiteWeb.TextExample.render />
     """
   end
 
