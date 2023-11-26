@@ -30,13 +30,15 @@ import ComTabs from "./tabs";
 import ComCombo from "./combo-box";
 import Flip from "./flip";
 import Expand from "./expand";
+import Toggle from "./toggle";
 
 let Hooks = {
   ResponsiveMenu,
   ComTabs,
   Flip,
   Expand,
-  ComCombo
+  ComCombo,
+  Toggle
 };
 
 // ==============================================
