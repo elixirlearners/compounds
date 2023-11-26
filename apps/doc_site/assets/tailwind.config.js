@@ -16,7 +16,7 @@ module.exports = {
       borderRadius: {
         theme: "6px"
       },
-      boxShadow : {
+      boxShadow: {
         small: "0 5px 10px rgba(0, 0, 0, 0.12)",
         medium: "0 8px 30px rgba(0, 0, 0, 0.12)",
         large: "0 30px 60px rgba(0, 0, 0, 0.12)",
@@ -39,7 +39,7 @@ module.exports = {
         accent_5: "#666",
         accent_6: "#444",
         accent_7: "#333",
-        aceent_8: "#111",
+        accent_8: "#111",
         foreground: "#000",
         success_lighter: "#D3E5FF",
         success_light: "#3291FF",

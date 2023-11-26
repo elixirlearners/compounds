@@ -45,8 +45,8 @@ defmodule Compounds.ComboBox do
     <div
       class={
         Tails.classes([
-          "flex items-center space-x-3 rounded-md px-3 border w-64 text-sm
-         border-neutral-400 focus-within:ring-4 focus-within:ring-neutral-300 transition duration-200",
+          "flex items-center space-x-3 rounded-md px-3 w-64 text-sm
+         transition duration-200 compounds-focus-outline",
           @class
         ])
       }

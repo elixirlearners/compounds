@@ -32,6 +32,14 @@ defmodule DocSiteWeb.HomeController do
     {:ok, assign(socket, %{component_name: nil, components: components})}
   end
 
+  # Handle phx-click events "navigate"
+  # https://elixirforum.com/t/liveview-navigate-with-phx-click/48576
+  @spec handle_event(<<_::64>>, map(), Phoenix.LiveView.Socket.t()) ::
+          {:noreply, Phoenix.LiveView.Socket.t()}
+  def handle_event("navigate", %{"component" => component}, socket) do
+    {:noreply, push_patch(socket, to: "/#{component}")}
+  end
+
   # Set selected_component to the current URL param component_name whenever there's a live patch event
   def handle_params(%{"component_name" => component_name} = _params, _uri, socket) do
     {:noreply, assign(socket, :selected_component, String.downcase(component_name))}

@@ -7,9 +7,10 @@ defmodule DocSiteWeb.TextAreaExample do
     {:ok, assign(socket, %{})}
   end
 
+  # TODO show case resizable textarea
   def render(assigns) do
     ~H"""
-    <h1>TODO</h1>
+    <Compounds.TextArea.text_area class="resize" />
     """
   end
 end

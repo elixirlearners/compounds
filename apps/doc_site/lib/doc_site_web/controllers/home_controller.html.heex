@@ -1,9 +1,17 @@
-<div class="w-full grid grid-cols-4 gap-4">
-  <div class="col-span-1">
+<div class="w-full grid grid-cols-7 gap-4 h-full">
+  <!-- -->
+  <div class="col-span-1 overflow-y-auto doc-scroll">
     <ul>
       <%= for component <- @components do %>
-        <li class="mb-6">
-          <.link href="#" navigate={~p"/#{component}"}>
+        <li
+          phx-click="navigate"
+          phx-value-component={component}
+          class="mb-2 text-neutral-500 hover:bg-neutral-100 hover:text-black
+          rounded-md p-2 transition ease-out duration-100 cursor-pointer mr-3
+
+          "
+        >
+          <.link>
             <%= component %>
           </.link>
         </li>
@@ -11,10 +19,10 @@
     </ul>
   </div>
 
-  <div class="w-full col-span-3">
+  <div class="w-full col-span-6">
     <%= if @selected_component do %>
       <h1 class="capitalize text-2xl font-bold pb-8"><%= @selected_component %></h1>
-      <.render_component_example name={@selected_component}/>
+      <.render_component_example name={@selected_component} />
     <% end %>
   </div>
 </div>
