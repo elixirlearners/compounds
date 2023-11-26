@@ -22,6 +22,7 @@ defmodule DocSiteWeb.HomeController do
       "Spinner",
       "Table",
       "Tabs",
+      "Text",
       "TextArea",
       "Toast",
       "Toggle",
@@ -160,6 +161,12 @@ defmodule DocSiteWeb.HomeController do
   def render_component_example(%{name: "tabs"} = assigns) do
     ~H"""
     <DocSiteWeb.TabsExample.render />
+    """
+  end
+
+  def render_component_example(%{name: "text"} = assigns) do
+    ~H"""
+    <DocSiteWeb.TextExample.render />
     """
   end
 
