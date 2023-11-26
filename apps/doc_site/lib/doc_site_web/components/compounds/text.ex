@@ -11,12 +11,8 @@ defmodule Compounds.Text do
   attr :class, :string, default: nil
   attr :type, :string, default: "primary"
   attr :tag, :string, default: "span"
-  attr :small, :boolean, required: false
-  attr :font, :string, default: "1rem"
-  attr :scale, :integer, default: 1
   attr :bold, :boolean, default: false
   attr :italic, :boolean, default: false
-  attr :rest, :global
 
   @spec text(map()) :: Phoenix.LiveView.Rendered.t()
   def text(assigns) do
