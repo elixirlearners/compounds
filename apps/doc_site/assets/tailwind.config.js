@@ -41,6 +41,7 @@ module.exports = {
         accent_7: "#333",
         aceent_8: "#111",
         foreground: "#000",
+        code: "#F81CE5",
         success_lighter: "#D3E5FF",
         success_light: "#3291FF",
         success: "#0070F3",
