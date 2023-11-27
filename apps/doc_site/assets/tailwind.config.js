@@ -20,7 +20,8 @@ module.exports = {
         small: "0 5px 10px rgba(0, 0, 0, 0.12)",
         medium: "0 8px 30px rgba(0, 0, 0, 0.12)",
         large: "0 30px 60px rgba(0, 0, 0, 0.12)",
-        drop_down: "0 4px 4px 0 rgba(0, 0, 0, 0.02)"
+        drop_down: "0 4px 4px 0 rgba(0, 0, 0, 0.02)",
+        toggle: "rgba(0, 0, 0, 0.2) 0 1px 2px 0, rgba(0, 0, 0, 0.1) 0 1px 3px 0"
       },
       transitionProperty: {
         'height': 'height'
