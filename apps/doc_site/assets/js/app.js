@@ -32,6 +32,7 @@ import ComPopover from "./popover";
 import Flip from "./flip";
 import Expand from "./expand";
 import Toggle from "./toggle";
+import ComModal from "./modal";
 
 let Hooks = {
   ResponsiveMenu,
@@ -40,7 +41,8 @@ let Hooks = {
   Expand,
   ComCombo,
   Toggle,
-  ComPopover
+  ComPopover,
+  ComModal
 };
 
 // ==============================================

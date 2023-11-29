@@ -1,6 +1,5 @@
 defmodule Compounds.Navbar do
   use Phoenix.Component
-  alias Phoenix.LiveView.JS
 
   attr(:rest, :global)
   attr(:fixed, :boolean, default: false)
@@ -11,17 +10,14 @@ defmodule Compounds.Navbar do
   slot(:right, required: true)
 
   def navbar(assigns) do
+    assigns =
+      assign(assigns,
+        default_class:
+          "bg-white border-b border-gray-200 px-4 z-50 #{fixed_classes(assigns[:fixed])}"
+      )
+
     ~H"""
-    <nav
-      {@rest}
-      id={@id}
-      class={
-        Tails.classes([
-          "#{if @fixed == true, do: "fixed left-0 right-0 top-0 z-50", else: nil}",
-          "bg-white border-b border-gray-200 px-4 z-50"
-        ])
-      }
-    >
+    <nav {@rest} id={@id} class={Tails.classes([@default_class, @class])}>
       <div class="md:container mx-auto">
         <div class="flex flex-wrap justify-between items-center h-16">
           <div class="flex justify-start items-center">
@@ -88,4 +84,7 @@ defmodule Compounds.Navbar do
     </div>
     """
   end
+
+  defp fixed_classes(true = _fixed), do: "fixed left-0 right-0 top-0 z-50"
+  defp fixed_classes(false = _fixed), do: ""
 end
