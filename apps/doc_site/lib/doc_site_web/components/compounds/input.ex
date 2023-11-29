@@ -77,7 +77,7 @@ defmodule Compounds.Input do
           <%= render_slot(@input_block_label) %>
         </.input_block_label>
       <% end %>
-      <div class={Keyword.get(@inner_wrapper, :class, "inline-flex items-center h-10")}>
+      <div class={Keyword.get(@inner_wrapper, :class, "inline-flex items-center h-10 w-full")}>
         <%= if length(@label_left) > 0 do %>
           <.label_left>
             <%= render_slot(@label_left) %>

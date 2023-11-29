@@ -1,3 +1,5 @@
+// TODO: rewrite this to be cleaner and more concise
+// TODO: implement escape to close dropdown
 export default ComCombo = {
   mounted() {
     const combo_box = this.el;
@@ -84,7 +86,6 @@ function handleKeyDown(event, combo_box, dropdown_menu, input) {
       }
       break;
   }
-
 }
 
 // Close the dropdown if the user clicks outside of the combo box
