@@ -5,6 +5,8 @@ defmodule Compounds.Icon do
   @moduledoc """
    A simple icon component. It could be used to render an SVG OR an image icon.
 
+   # TODO, add support for taking in a hero icon as an attribute
+
   # Examples:
 
   ## Image

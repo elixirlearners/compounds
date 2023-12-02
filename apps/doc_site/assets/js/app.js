@@ -32,6 +32,7 @@ import ComPopover from "./popover";
 import Flip from "./flip";
 import Expand from "./expand";
 import Toggle from "./toggle";
+import ComTextArea from "./text-area";
 import ComModal from "./modal";
 
 let Hooks = {
@@ -41,6 +42,7 @@ let Hooks = {
   Expand,
   ComCombo,
   Toggle,
+  ComTextArea,
   ComPopover,
   ComModal
 };
