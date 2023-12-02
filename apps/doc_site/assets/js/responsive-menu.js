@@ -1,33 +1,32 @@
+import { makeAnimation } from "./animations";
+
 const toggleHiddenElement = (dom, options) => {
   const { root, trigger } = dom;
-  const { eventName, toggledClassName, animationConfig } = options;
+  const { eventName, toggledClassName, animation } = options;
 
   const show = () => {
     root.setAttribute("data-open", true);
     root.classList.remove(toggledClassName);
 
     root.getAnimations().forEach((anim) => {
-      anim.cancel();
+      anim.pause();
     });
 
-    const anim = root.animate(animationConfig.in, animationConfig.options);
-
-    anim.oncancel = () => {
-      root.classList.add(toggledClassName);
-    };
+    animation.in.play();
   };
 
   const hide = () => {
     root.setAttribute("data-open", false);
 
     root.getAnimations().forEach((anim) => {
-      anim.cancel();
+      anim.pause();
     });
 
-    const anim = root.animate(animationConfig.out, animationConfig.options);
-    anim.onfinish = () => {
-      root.classList.add(toggledClassName);
-    };
+    animation.out.play();
+  };
+
+  const addClassName = () => {
+    root.classList.add(toggledClassName);
   };
 
   const toggleState = (_event) => {
@@ -37,10 +36,14 @@ const toggleHiddenElement = (dom, options) => {
 
   const setupListeners = () => {
     trigger.addEventListener(eventName, toggleState);
+    animation.in.addEventListener("cancel", addClassName);
+    animation.out.addEventListener("finish", addClassName);
   };
 
   const removeListeners = () => {
-    removeEventListener(eventName, toggleState);
+    trigger.removeEventListener(eventName, toggleState);
+    animation.in.removeEventListener("cancel", addClassName);
+    animation.out.removeEventListener("finish", addClassName);
   };
 
   setupListeners();
@@ -53,22 +56,13 @@ export default {
   mounted() {
     const id = this.el.getAttribute("id");
     document.querySelectorAll(`[data-menutrigger=${id}]`).forEach((trigger) => {
-      const animationConfig = {
-        in: [
-          { opacity: 0, transform: "translateY(-10px)" },
-          { opacity: 100, transform: "translateY(0px)" },
-        ],
-        out: [{ opacity: 100 }, { opacity: 0 }],
-        options: { duration: 200, iterations: 1 },
-      };
-
       this.instances.push(
         toggleHiddenElement(
           { root: this.el, trigger },
           {
             eventName: "click",
             toggledClassName: "hidden",
-            animationConfig,
+            animation: makeAnimation(this.el, "fadeDown"),
           }
         )
       );
