@@ -1,6 +1,8 @@
 defmodule Compounds.ComboBox do
   use Phoenix.Component
 
+  # TODO: Implement escape to exit combo box
+
   # 1.0 todos
   # TODO: Add "no result" text
   # TODO: disabled status
@@ -10,7 +12,7 @@ defmodule Compounds.ComboBox do
   attr :options, :list, default: []
   attr :selected, :string, default: nil
   attr :class, :string, default: nil
-  attr :id, :string
+  attr :id, :string, default: nil
   attr :rest, :global
 
   @spec combo_box(map()) :: Phoenix.LiveView.Rendered.t()

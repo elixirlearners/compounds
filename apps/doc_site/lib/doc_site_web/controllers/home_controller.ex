@@ -17,6 +17,7 @@ defmodule DocSiteWeb.HomeController do
       "Icon",
       "Input",
       "Navbar",
+      "Modal",
       "RadioGroup",
       "Separator",
       "Spinner",
@@ -131,6 +132,12 @@ defmodule DocSiteWeb.HomeController do
   def render_component_example(%{name: "navbar"} = assigns) do
     ~H"""
     <DocSiteWeb.NavbarExample.render />
+    """
+  end
+
+  def render_component_example(%{name: "modal"} = assigns) do
+    ~H"""
+    <DocSiteWeb.ModalExample.render />
     """
   end
 
