@@ -1,16 +1,19 @@
-export default {
- mounted() {
-    this.el.setAttribute("data-flipped", "false");
-    this.el.style.transition = "rotate 0.2s ease-out"
+import animate from "./animations";
 
-    this.el.addEventListener("flip", (event) => {
-      let is_flipped = (/true/i).test(this.el.getAttribute("data-flipped"));
-      if(is_flipped){
-        this.el.style.rotate = "0deg";
+export default {
+  mounted() {
+    const animation = animate(this.el).rotate("180deg");
+
+    this.el.setAttribute("data-flipped", "false");
+
+    this.el.addEventListener("flip", (_) => {
+      const isFlipped = /true/i.test(this.el.getAttribute("data-flipped"));
+      if (isFlipped) {
+        animation.reverse();
       } else {
-        this.el.style.rotate = "180deg";
+        animation.play();
       }
-      this.el.setAttribute("data-flipped", !is_flipped);
+      this.el.setAttribute("data-flipped", !isFlipped);
     });
-  }
+  },
 };

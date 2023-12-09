@@ -9,7 +9,16 @@ defmodule DocSiteWeb.AlertExample do
 
   def render(assigns) do
     ~H"""
-    <h1>TODO</h1>
+    <button id="button">Move</button>
+    <div
+      id="whatever"
+      phx-hook="Move"
+      data-compounds-animation-easing="spring"
+      data-compounds-animation-fill="forwards"
+      data-compounds-animation-duration="1000"
+      data-toggle="false"
+      class="w-10 h-10 rounded-lg bg-red-500 origin-center">
+      </div>
     """
   end
 end

@@ -33,9 +33,16 @@ defmodule Compounds.Accordion do
 
     ~H"""
     <div class={Tails.classes([@default_classes, @class])}>
-      <div class="cursor-pointer outline-0" role="button">
+      <div
+        class="cursor-pointer outline-0"
+        role="button"
+        phx-click={
+          JS.dispatch("flip", to: "#" <> @contents_id <> "-icon")
+          |> JS.dispatch("expand", to: "#" <> @contents_id)
+        }
+      >
         <div class="flex justify-between items-center text-foreground">
-          <h3 class="m-0 text-2xl font-bold"><%= @title %></h3>
+          <h3 class="m-0 text-2xl font-bold select-none"><%= @title %></h3>
           <.accordion_icon contents_id={@contents_id} />
         </div>
         <%= if length(@subtitle) > 0 do %>
@@ -44,6 +51,9 @@ defmodule Compounds.Accordion do
         <div
           id={@contents_id}
           phx-hook="Expand"
+          data-compounds-animation-duration="300"
+          data-compounds-animation-easing="easeInOut"
+          data-compounds-animation-fill="forwards"
           class="max-h-0 pr-0 pl-0 leading-6 first:mt-0 last:mb-0 overflow-hidden"
         >
           <div>
@@ -61,12 +71,11 @@ defmodule Compounds.Accordion do
   defp accordion_icon(assigns) do
     ~H"""
     <svg
-      id={Compounds.Id.generate("accordion-button")}
+      id={@contents_id <> "-icon"}
       phx-hook="Flip"
-      phx-click={
-        JS.dispatch("flip")
-        |> JS.dispatch("expand", to: "#" <> @contents_id)
-      }
+      data-compounds-animation-duration="200"
+      data-compounds-animation-easing="easeInOut"
+      data-compounds-animation-fill="forwards"
       class={Tails.classes(["w-6 h-6", @class])}
       viewBox="0 0 24 24"
       stroke="currentColor"

@@ -1,14 +1,20 @@
+import animate from "./animations";
+
 export default {
   mounted() {
-    this.el.style.maxHeight = "0px";
-    this.el.style.transition = "max-height 0.2s ease-out"
+    this.el.setAttribute("data-expanded", false);
+    const animation = animate(this.el).maxHeight(`${this.el.scrollHeight}px`);
 
-    this.el.addEventListener("expand", (event) => {
-      if(this.el.style.maxHeight !== "0px") {
-        this.el.style.maxHeight = "0px";
+    this.el.addEventListener("expand", (_) => {
+      const isExpanded = /true/i.test(this.el.getAttribute("data-expanded"));
+
+      if (isExpanded) {
+        animation.reverse();
       } else {
-        this.el.style.maxHeight = this.el.scrollHeight + "px";
+        animation.play();
       }
-    })
-  }
+
+      this.el.setAttribute("data-expanded", !isExpanded);
+    });
+  },
 };

@@ -80,12 +80,13 @@ defmodule Compounds.Navbar do
       id={@id}
       phx-hook="ResponsiveMenu"
       data-open="false"
-      data-compounds-animation="fadeDown"
-      data-compounds-animation-duration="300"
+      data-compounds-animation-duration="600"
       data-compounds-animation-easing="easeInOut"
       data-compounds-animation-iterations="1"
-      class="hidden absolute md:block md:static top-16 left-0 right-0 h-screen md:h-auto z-40 p-4 md:p-0 bg-white"
+      data-compounds-animation-fill="none"
+      class="bg-white hidden absolute md:block md:static top-16 left-0 right-0 h-screen md:h-auto z-40 p-4 md:p-0"
     >
+      <%!-- class="bg-slate-400 hidden absolute md:block md:static opacity-0 md:opacity-100 top-16 left-0 right-0 h-screen md:h-auto z-40 p-4 md:p-0" --%>
       <ul class="md:space-x-4 md:space-y-0 md:flex md:mx-0 mx-auto space-y-3">
         <li :for={item <- @item}><%= render_slot(item) %></li>
       </ul>
